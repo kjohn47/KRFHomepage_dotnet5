@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "KRFHomepage.Infrastructure/1.0.0": {
+        "dependencies": {
+          "KRFHomepage.Domain": "1.0.0"
+        },
+        "runtime": {
+          "KRFHomepage.Infrastructure.dll": {}
+        }
+      },
+      "KRFHomepage.Domain/1.0.0": {
+        "runtime": {
+          "KRFHomepage.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "KRFHomepage.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "KRFHomepage.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

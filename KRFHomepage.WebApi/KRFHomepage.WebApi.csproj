@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Translations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KRFCommon" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KRFHomepage.App\KRFHomepage.App.csproj" />
+    <ProjectReference Include="..\KRFHomepage.Domain\KRFHomepage.Domain.csproj" />
+    <ProjectReference Include="..\KRFHomepage.Infrastructure\KRFHomepage.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,16 @@
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.deps.json
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.csprojAssemblyReference.cache
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfoInputs.cache
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfo.cs
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+C:\Users\E868\COREAPI\KJohnMicroServices\WebApi\KRFHomepage\Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.deps.json
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.csprojAssemblyReference.cache
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfoInputs.cache
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfo.cs
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb

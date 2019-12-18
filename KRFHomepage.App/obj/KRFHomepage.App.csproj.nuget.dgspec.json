@@ -1,0 +1,188 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj",
+        "projectName": "KRFHomepage.App",
+        "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj",
+        "packagesPath": "C:\\Users\\E868\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\E868\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\NUGETREPO": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj": {
+                "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj"
+              },
+              "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "KRFCommon": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
+        "projectName": "KRFHomepage.Domain",
+        "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
+        "packagesPath": "C:\\Users\\E868\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\E868\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\NUGETREPO": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj",
+        "projectName": "KRFHomepage.Infrastructure",
+        "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\E868\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\E868\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\NUGETREPO": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj": {
+                "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
