@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "KRFCommon/1.0.0": {
+      "KRFCommon/1.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
@@ -1013,7 +1013,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "KRFCommon": "1.0.0",
+          "KRFCommon": "1.0.1",
           "KRFHomepage.Domain": "1.0.0",
           "KRFHomepage.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
@@ -1051,13 +1051,13 @@
     }
   },
   "libraries": {
-    "KRFCommon/1.0.0": {
-      "sha512": "5urt7C19B6b3RavH0uJTn+sX47tYTC7qQm88qlE5enWtNGxlSxS0YRLObIK5UEMs0oabMvD4qtTG8aDEaqUxYA==",
+    "KRFCommon/1.0.1": {
+      "sha512": "v4XAdQy06SS/DlYiOBVdjs1g24yl4CM47xfv58kwkRdlE94SYBT7lc2Nl3ci7s6BRogYdRg7kskfqE9iookalA==",
       "type": "package",
-      "path": "krfcommon/1.0.0",
+      "path": "krfcommon/1.0.1",
       "files": [
         ".nupkg.metadata",
-        "krfcommon.1.0.0.nupkg.sha512",
+        "krfcommon.1.0.1.nupkg.sha512",
         "krfcommon.nuspec",
         "lib/netcoreapp3.1/KRFCommon.dll"
       ]
@@ -3664,7 +3664,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "KRFCommon >= 1.0.0",
+      "KRFCommon >= 1.0.1",
       "KRFHomepage.App >= 1.0.0",
       "KRFHomepage.Domain >= 1.0.0",
       "KRFHomepage.Infrastructure >= 1.0.0",
@@ -3672,19 +3672,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\E868\\.nuget\\packages\\": {}
+    "C:\\Users\\KJohn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\KRFHomepage.WebApi.csproj",
+      "projectUniqueName": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\KRFHomepage.WebApi.csproj",
       "projectName": "KRFHomepage.WebApi",
-      "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\KRFHomepage.WebApi.csproj",
-      "packagesPath": "C:\\Users\\E868\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\obj\\",
+      "projectPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\KRFHomepage.WebApi.csproj",
+      "packagesPath": "C:\\Users\\KJohn\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\E868\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\KJohn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3692,20 +3692,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\NUGETREPO": {},
+        "D:\\KRFNugetRepo": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj": {
-              "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj"
+            "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj": {
+              "projectPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.App\\KRFHomepage.App.csproj"
             },
-            "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj": {
-              "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj"
+            "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj": {
+              "projectPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj"
             },
-            "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj"
+            "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj": {
+              "projectPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Infrastructure\\KRFHomepage.Infrastructure.csproj"
             }
           }
         }
@@ -3721,7 +3721,7 @@
         "dependencies": {
           "KRFCommon": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.1, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

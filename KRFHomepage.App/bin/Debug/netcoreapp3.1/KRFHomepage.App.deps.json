@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "KRFHomepage.App/1.0.0": {
         "dependencies": {
-          "KRFCommon": "1.0.0",
+          "KRFCommon": "1.0.1",
           "KRFHomepage.Domain": "1.0.0",
           "KRFHomepage.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
@@ -17,14 +17,14 @@
           "KRFHomepage.App.dll": {}
         }
       },
-      "KRFCommon/1.0.0": {
+      "KRFCommon/1.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
         },
         "runtime": {
           "lib/netcoreapp3.1/KRFCommon.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
           }
         }
       },
@@ -770,12 +770,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "KRFCommon/1.0.0": {
+    "KRFCommon/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5urt7C19B6b3RavH0uJTn+sX47tYTC7qQm88qlE5enWtNGxlSxS0YRLObIK5UEMs0oabMvD4qtTG8aDEaqUxYA==",
-      "path": "krfcommon/1.0.0",
-      "hashPath": "krfcommon.1.0.0.nupkg.sha512"
+      "sha512": "sha512-gGhSTP6cfjNJNwXMAvb7lNkSIGTo3iP7VE6zNXV0gKD4vaErErFs2KlGGNXhSieYY6tLLkuYvXWOk1yO+Ojc9A==",
+      "path": "krfcommon/1.0.1",
+      "hashPath": "krfcommon.1.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",

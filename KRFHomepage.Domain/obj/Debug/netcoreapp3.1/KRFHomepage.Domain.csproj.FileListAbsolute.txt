@@ -14,3 +14,11 @@ C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debu
 C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfo.cs
 C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
 C:\Users\E868\COREAPI\KJohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.deps.json
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\bin\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.csprojAssemblyReference.cache
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfoInputs.cache
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.AssemblyInfo.cs
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.dll
+D:\GIT\KjohnMicroServices\KRFHomepage\KRFHomepage.Domain\obj\Debug\netcoreapp3.1\KRFHomepage.Domain.pdb

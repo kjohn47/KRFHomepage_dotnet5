@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\E868\\.nuget\\packages\\": {}
+    "C:\\Users\\KJohn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
+      "projectUniqueName": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
       "projectName": "KRFHomepage.Domain",
-      "projectPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
-      "packagesPath": "C:\\Users\\E868\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\obj\\",
+      "projectPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\KRFHomepage.Domain.csproj",
+      "packagesPath": "C:\\Users\\KJohn\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\KjohnMicroServices\\KRFHomepage\\KRFHomepage.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\E868\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\KJohn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -28,7 +28,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\E868\\COREAPI\\KJohnMicroServices\\NUGETREPO": {},
+        "D:\\KRFNugetRepo": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
