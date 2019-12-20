@@ -4,6 +4,7 @@ using KRFCommon.Context;
 using KRFCommon.Controller;
 using KRFCommon.CQRS.Query;
 using KRFHomepage.Domain.CQRS.Homepage.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Homepage
@@ -22,6 +23,15 @@ namespace WebApi.Controllers.Homepage
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof( HomePageOutput[] ))]
         public async Task<IActionResult> GetData(
                 [FromServices] IQuery<HomePageInput, HomePageOutput[]> query )
+        {
+            return await this.ExecuteAsyncQuery(new HomePageInput(), query);
+        }
+
+        [Authorize]
+        [HttpGet("GetDataAuth")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(HomePageOutput[]))]
+        public async Task<IActionResult> GetDataAuth(
+        [FromServices] IQuery<HomePageInput, HomePageOutput[]> query)
         {
             return await this.ExecuteAsyncQuery(new HomePageInput(), query);
         }

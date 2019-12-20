@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="KRFCommon" Version="1.0.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
   </ItemGroup>
 

@@ -1,11 +1,16 @@
 using KRFCommon.Context;
 using KRFHomepage.App.Injection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KRFHomepage.WebApi
 {
@@ -62,6 +67,39 @@ namespace KRFHomepage.WebApi
             AppQueryInjection.InjectQuery(services);
             AppCommandInjection.InjectCommand(services);
             AppProxyInjection.InjectProxy(services);
+
+            services.AddAuthentication( o => {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("APICOMMONSIGNEDKEY")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false
+                };
+                x.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = ctx =>
+                    {
+                        if (ctx.Request.Headers.ContainsKey("AccessToken"))
+                        {
+                            var bearerToken = ctx.Request.Headers["AccessToken"].ElementAt(0);
+                            var token = bearerToken.StartsWith("Bearer ") ? bearerToken.Substring(7) : bearerToken;
+                            ctx.Token = token;
+                        }
+                        else
+                        {
+                            ctx.NoResult();
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +113,10 @@ namespace KRFHomepage.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
