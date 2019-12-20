@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace KRFHomepage.WebApi
 {
@@ -27,6 +28,29 @@ namespace KRFHomepage.WebApi
 
             services.AddSwaggerGen(option =>
            {
+               option.AddSecurityDefinition( "Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+               {
+                   In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                   Description = "Place Access Bearer JWT Token",
+                   Name = "AccessToken",
+                   Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
+               });
+
+               option.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+               {
+                   { 
+                       new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                       {
+                            Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                            {
+                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                       }, 
+                       new List<string>()
+                   }
+               });
+
                option.SwaggerDoc(apiName, new Microsoft.OpenApi.Models.OpenApiInfo
                {
                    Version = "v1",

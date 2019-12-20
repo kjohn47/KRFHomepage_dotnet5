@@ -3,7 +3,6 @@ using KRFHomepage.Domain.CQRS.Homepage.Query;
 using System.Threading.Tasks;
 using System.Linq;
 using KRFCommon.CQRS.Query;
-using KRFCommon.Context;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
