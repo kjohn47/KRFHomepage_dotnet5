@@ -35,5 +35,14 @@ namespace WebApi.Controllers.Homepage
         {
             return await this.ExecuteAsyncQuery(new HomePageInput(), query);
         }
+
+        [Authorize(Policies.Admin)]
+        [HttpGet("GetDataAuthAdmin")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(HomePageOutput[]))]
+        public async Task<IActionResult> GetDataAuthAdmin(
+        [FromServices] IQuery<HomePageInput, HomePageOutput[]> query)
+        {
+            return await this.ExecuteAsyncQuery(new HomePageInput(), query);
+        }
     }
 }
