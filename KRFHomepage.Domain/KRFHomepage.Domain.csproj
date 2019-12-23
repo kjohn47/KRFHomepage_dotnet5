@@ -8,7 +8,6 @@
     <Folder Include="CQRS\Homepage\Command\" />
     <Folder Include="Common\" />
     <Folder Include="CQRS\Translations\Command\" />
-    <Folder Include="CQRS\Translations\Query\" />
     <Folder Include="Database\Homepage\" />
     <Folder Include="Database\Translation\" />
   </ItemGroup>

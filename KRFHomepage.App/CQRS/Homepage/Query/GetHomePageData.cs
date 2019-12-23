@@ -7,7 +7,7 @@ using KRFCommon.CQRS.Common;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
-    class GetHomePageData : IQuery<HomePageInput, HomePageOutput[]>
+    public class GetHomePageData : IQuery<HomePageInput, HomePageOutput[]>
     {
         private readonly string[] Summaries = new[]
         {

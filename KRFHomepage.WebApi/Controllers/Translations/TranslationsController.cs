@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KRFCommon.Context;
 using KRFCommon.Controller;
 using KRFCommon.CQRS.Query;
+using KRFHomepage.Domain.CQRS.Translations.Query;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Translations
@@ -13,13 +14,12 @@ namespace WebApi.Controllers.Translations
     {
         [HttpGet("{langCode}")]
 
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(string))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TranslationResponse))]
         public async Task<IActionResult> Get(
-                //[FromServices] IQuery<HomePageInput, HomePageOutput[]> query
+                [FromServices] IQuery<TranslationRequest, TranslationResponse> query,
                 [FromRoute] string langCode)
         {
-            //return await this.ExecuteAsyncQuery(new HomePageInput(), query);
-            return await Task.Run(() => this.Ok(langCode));
+            return await this.ExecuteAsyncQuery(new TranslationRequest( langCode ), query);            
         }
     }
 }

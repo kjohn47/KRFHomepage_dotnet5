@@ -1,6 +1,6 @@
 using KRFCommon.Context;
 using KRFCommon.Swagger;
-using KRFHomepage.App.Common;
+using KRFHomepage.App.Constants;
 using KRFHomepage.App.Injection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,9 +15,9 @@ namespace KRFHomepage.WebApi
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
-            this._apiName = configuration["AppConfiguration:ApiName"];
-            this._tokenIdentifier = configuration["AppConfiguration:TokenIdentifier"];
-            this._tokenKey = configuration["AppConfiguration:TokenKey"];
+            this._apiName = configuration[AppConstants.AppName_Key];
+            this._tokenIdentifier = configuration[AppConstants.TokenIdentifier_Key];
+            this._tokenKey = configuration[AppConstants.TokenKey_Key];
         }
 
         private readonly string _apiName;

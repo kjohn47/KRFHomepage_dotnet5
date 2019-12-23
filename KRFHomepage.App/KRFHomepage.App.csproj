@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="CQRS\Homepage\Command\" />
     <Folder Include="CQRS\Translations\Command\" />
-    <Folder Include="CQRS\Translations\Query\" />
   </ItemGroup>
 
   <ItemGroup>
