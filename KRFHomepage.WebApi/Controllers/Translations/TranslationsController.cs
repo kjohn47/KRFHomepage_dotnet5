@@ -13,7 +13,6 @@ namespace WebApi.Controllers.Translations
     public class TranslationsController : KRFController
     {
         [HttpGet("{langCode}")]
-
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TranslationResponse))]
         public async Task<IActionResult> Get(
                 [FromServices] IQuery<TranslationRequest, TranslationResponse> query,
