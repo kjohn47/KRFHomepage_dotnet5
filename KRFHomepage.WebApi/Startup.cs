@@ -1,5 +1,6 @@
 using KRFCommon.Context;
 using KRFCommon.Swagger;
+using KRFHomepage.App.Common;
 using KRFHomepage.App.Injection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,25 +11,29 @@ using Microsoft.Extensions.Hosting;
 namespace KRFHomepage.WebApi
 {
     public class Startup
-    {
-        private const string apiName = "KRFHomepage";
-        private const string tokenIdentifier = "AccessToken";
-        private const string tokenKey = "APICOMMONSIGNEDKEY";
+    {       
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
+            this._apiName = configuration["AppConfiguration:ApiName"];
+            this._tokenIdentifier = configuration["AppConfiguration:TokenIdentifier"];
+            this._tokenKey = configuration["AppConfiguration:TokenKey"];
         }
+
+        private readonly string _apiName;
+        private readonly string _tokenIdentifier;
+        private readonly string _tokenKey;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            InjectUserContext.InjectContext(services, tokenIdentifier, tokenKey);
+            InjectUserContext.InjectContext(services, _tokenIdentifier, _tokenKey);
 
             services.AddControllers();
 
-            SwaggerInit.ServiceInit(services, apiName, tokenIdentifier);
+            SwaggerInit.ServiceInit(services, _apiName, _tokenIdentifier);
 
             AppQueryInjection.InjectQuery(services);
             AppCommandInjection.InjectCommand(services);
@@ -54,7 +59,7 @@ namespace KRFHomepage.WebApi
                 endpoints.MapControllers();
             });
 
-            SwaggerInit.Configure(app, apiName);
+            SwaggerInit.Configure(app, _apiName);
         }
     }
 }
