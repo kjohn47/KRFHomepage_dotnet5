@@ -13,12 +13,6 @@ namespace WebApi.Controllers.Homepage
     [Route("Homepage/")]
     public class HomepageController : KRFController
     {
-        IUserContext _user;
-        public HomepageController( IUserContext userContext )
-        {
-            this._user = userContext;
-        }
-
         [HttpGet("GetData")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof( HomePageOutput[] ))]
         public async Task<IActionResult> GetData(

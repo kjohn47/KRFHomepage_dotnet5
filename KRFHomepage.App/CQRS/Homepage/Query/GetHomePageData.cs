@@ -4,11 +4,17 @@ using System.Threading.Tasks;
 using System.Linq;
 using KRFCommon.CQRS.Query;
 using KRFCommon.CQRS.Common;
+using KRFCommon.Context;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput[]>
     {
+        public GetHomePageData( IUserContext userContext )
+        {
+
+        }
+
         private readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
