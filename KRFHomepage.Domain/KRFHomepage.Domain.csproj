@@ -9,7 +9,6 @@
     <Folder Include="Common\" />
     <Folder Include="CQRS\Translations\Command\" />
     <Folder Include="Database\Homepage\" />
-    <Folder Include="Database\Translation\" />
   </ItemGroup>
 
 </Project>

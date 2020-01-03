@@ -29,12 +29,13 @@ namespace KRFHomepage.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            InjectUserContext.InjectContext(services, _tokenIdentifier, _tokenKey);
+            InjectUserContext.InjectContext(services, this._tokenIdentifier, this._tokenKey);
 
             services.AddControllers();
 
-            SwaggerInit.ServiceInit(services, _apiName, _tokenIdentifier);
+            SwaggerInit.ServiceInit(services, this._apiName, this._tokenIdentifier);
 
+            AppDBContextInjection.InjectDBContext(services, this.Configuration.GetConnectionString(AppConstants.DefaultConStr));
             AppQueryInjection.InjectQuery(services);
             AppCommandInjection.InjectCommand(services);
             AppProxyInjection.InjectProxy(services);
@@ -59,7 +60,9 @@ namespace KRFHomepage.WebApi
                 endpoints.MapControllers();
             });
 
-            SwaggerInit.Configure(app, _apiName);
+            SwaggerInit.Configure(app, this._apiName);
+
+            AppDBContextInjection.ConfigureDBContext(app);
         }
     }
 }
