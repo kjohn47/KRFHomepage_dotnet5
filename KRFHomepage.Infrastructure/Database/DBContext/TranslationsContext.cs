@@ -1,35 +1,17 @@
-﻿using KRFHomepage.Domain.Database.Translation;
+﻿using KRFHomepage.Domain.Database.Translations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace KRFHomepage.Infrastructure.Database.DBContext
 {
-    public class TranslationsContext: DbContext
+    public partial class HomepageDBContext
     {
-        public TranslationsContext(DbContextOptions options) : base(options)
-        {            
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {            
-        }
-
-        //// Database Tables class ////
-        public DbSet<Language> Languages { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<TranslationCategory> Categories { get; set; }
         public DbSet<Translation> Translations { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected void TranslationModelCreating(ModelBuilder modelBuilder)
         {
             //// Database Tables Configure ////
-            modelBuilder.Entity<Language>(l => 
-            {
-                l.ToTable("languages");
-                l.Property(x => x.Name).HasMaxLength(30).IsRequired();
-                l.HasMany(l => l.Translations).WithOne(c => c.Language);
-            });
-
             modelBuilder.Entity<TranslationCategory>(c =>
             {
                 c.ToTable("categories");
@@ -55,10 +37,6 @@ namespace KRFHomepage.Infrastructure.Database.DBContext
             });            
 
             //// Data Seeding ////            
-            modelBuilder.Entity<Language>().HasData( new[] {
-                new Language { Code = "PT", Name = "Portuguese" },
-                new Language { Code = "EN", Name = "English" }
-            });
             modelBuilder.Entity<TranslationCategory>().HasData( new[] {
                 new TranslationCategory { Value = "_generic" },
                 new TranslationCategory { Value = "_tableText" },

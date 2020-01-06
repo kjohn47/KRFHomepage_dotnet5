@@ -1,6 +1,6 @@
 ﻿using KRFCommon.CQRS.Query;
 using KRFHomepage.Domain.CQRS.Translations.Query;
-using KRFHomepage.Domain.Database.Translation;
+using KRFHomepage.Domain.Database.Translations;
 using KRFHomepage.Infrastructure.Database.DBContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace KRFHomepage.App.CQRS.Translations.Query
 {
     public class GetAppTranslations : IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>>
     {
-        private readonly TranslationsContext _translationsContext;               
+        private readonly HomepageDBContext _translationsContext;               
 
-        public GetAppTranslations( TranslationsContext translationsContext )
+        public GetAppTranslations(HomepageDBContext translationsContext )
         {
             this._translationsContext = translationsContext;
         }

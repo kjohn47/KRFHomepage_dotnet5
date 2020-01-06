@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Database\DBFiles\" />
+    <Folder Include="Database\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

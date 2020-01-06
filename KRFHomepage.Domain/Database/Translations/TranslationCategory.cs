@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KRFHomepage.Domain.Database.Translation
+namespace KRFHomepage.Domain.Database.Translations
 {
     public class TranslationCategory
     {

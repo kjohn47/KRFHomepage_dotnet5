@@ -3,16 +3,14 @@ using KRFHomepage.Infrastructure.Database.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KRFHomepage.Infrastructure.Database.Migrations
 {
-    [DbContext(typeof(TranslationsContext))]
-    [Migration("20200103173920_InitialTranslations")]
-    partial class InitialTranslations
+    [DbContext(typeof(HomepageDBContext))]
+    partial class HomepageDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +18,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("KRFHomepage.Domain.Database.Translation.Language", b =>
+            modelBuilder.Entity("KRFHomepage.Domain.Database.Common.Language", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(450)");
@@ -47,7 +45,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("KRFHomepage.Domain.Database.Translation.Token", b =>
+            modelBuilder.Entity("KRFHomepage.Domain.Database.Translations.Token", b =>
                 {
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(450)");
@@ -163,7 +161,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("KRFHomepage.Domain.Database.Translation.Translation", b =>
+            modelBuilder.Entity("KRFHomepage.Domain.Database.Translations.Translation", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -615,7 +613,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("KRFHomepage.Domain.Database.Translation.TranslationCategory", b =>
+            modelBuilder.Entity("KRFHomepage.Domain.Database.Translations.TranslationCategory", b =>
                 {
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(450)");
@@ -643,21 +641,21 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("KRFHomepage.Domain.Database.Translation.Translation", b =>
+            modelBuilder.Entity("KRFHomepage.Domain.Database.Translations.Translation", b =>
                 {
-                    b.HasOne("KRFHomepage.Domain.Database.Translation.Language", "Language")
+                    b.HasOne("KRFHomepage.Domain.Database.Common.Language", "Language")
                         .WithMany("Translations")
                         .HasForeignKey("LanguageCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KRFHomepage.Domain.Database.Translation.Token", "Token")
+                    b.HasOne("KRFHomepage.Domain.Database.Translations.Token", "Token")
                         .WithMany("Translations")
                         .HasForeignKey("TokenValue")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KRFHomepage.Domain.Database.Translation.TranslationCategory", "TranslationCategory")
+                    b.HasOne("KRFHomepage.Domain.Database.Translations.TranslationCategory", "TranslationCategory")
                         .WithMany("Translations")
                         .HasForeignKey("TranslationCategoryValue")
                         .OnDelete(DeleteBehavior.Cascade)

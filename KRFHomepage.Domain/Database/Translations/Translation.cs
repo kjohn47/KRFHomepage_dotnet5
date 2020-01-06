@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using KRFHomepage.Domain.Database.Common;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KRFHomepage.Domain.Database.Translation
+namespace KRFHomepage.Domain.Database.Translations
 {
     public class Translation
     {

@@ -9,14 +9,14 @@ namespace KRFHomepage.App.Injection
     {
         public static void InjectDBContext(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<TranslationsContext>( opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<HomepageDBContext>( opt => opt.UseSqlServer(connectionString));
         }
 
         public static void ConfigureDBContext( IApplicationBuilder app )
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<TranslationsContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<HomepageDBContext>().Database.Migrate();
             }
         }
     }

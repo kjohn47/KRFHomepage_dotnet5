@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KRFHomepage.Domain.Database.Translation
+namespace KRFHomepage.Domain.Database.Translations
 {
-    public class Language
+    public class Token
     {
         [Key]
-        public string Code { get; set; }
-        public string Name { get; set; }
-
+        public string Value { get; set; }
         public virtual ICollection<Translation> Translations { get; set; }
     }
 }

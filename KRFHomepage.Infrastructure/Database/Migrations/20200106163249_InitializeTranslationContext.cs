@@ -2,7 +2,7 @@
 
 namespace KRFHomepage.Infrastructure.Database.Migrations
 {
-    public partial class InitialTranslations : Migration
+    public partial class InitializeTranslationContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
