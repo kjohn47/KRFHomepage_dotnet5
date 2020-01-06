@@ -17,6 +17,7 @@ namespace KRFHomepage.Infrastructure.Database.DBContext
                 l.ToTable("languages");
                 l.Property(x => x.Name).HasMaxLength(30).IsRequired();
                 l.HasMany(l => l.Translations).WithOne(c => c.Language);
+                l.HasOne(h => h.HomePageData).WithOne(c => c.Language);
             });
 
             //// Data Seed ////

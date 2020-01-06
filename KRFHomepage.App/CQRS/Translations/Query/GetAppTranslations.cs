@@ -11,16 +11,16 @@ namespace KRFHomepage.App.CQRS.Translations.Query
 {
     public class GetAppTranslations : IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>>
     {
-        private readonly HomepageDBContext _translationsContext;               
+        private readonly HomepageDBContext _homepageDBContext;               
 
-        public GetAppTranslations(HomepageDBContext translationsContext )
+        public GetAppTranslations(HomepageDBContext homepageDBContext)
         {
-            this._translationsContext = translationsContext;
+            this._homepageDBContext = homepageDBContext;
         }
         
         public async Task<IQueryOut<Dictionary<string, Dictionary<string, string>>>> QueryAsync(TranslationRequest request)
         {
-            var translatedText = await this._translationsContext.Categories
+            var translatedText = await this._homepageDBContext.Categories
                 .Include(x => x.Translations)
                 .Select( x => new TranslationCategory
                 {

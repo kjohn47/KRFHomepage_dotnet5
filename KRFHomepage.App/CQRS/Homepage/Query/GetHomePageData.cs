@@ -1,29 +1,38 @@
-﻿using System;
-using KRFHomepage.Domain.CQRS.Homepage.Query;
+﻿using KRFHomepage.Domain.CQRS.Homepage.Query;
 using System.Threading.Tasks;
 using KRFCommon.CQRS.Query;
-using KRFCommon.Context;
-using Newtonsoft.Json;
+using KRFHomepage.Infrastructure.Database.DBContext;
+using System.Linq;
+using KRFCommon.CQRS.Common;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {
-        private string _homepageContext;
-        public GetHomePageData()
+        private readonly HomepageDBContext _homepageDBContext;
+        
+        public GetHomePageData(HomepageDBContext homepageDBContext)
         {
-            this._homepageContext = "Titulo1";
-        }
+            this._homepageDBContext = homepageDBContext;
+        }   
 
         public async Task<IQueryOut<HomePageOutput>> QueryAsync(HomePageInput request)
         {
-            var result = new HomePageOutput
+
+            var homeDB = await Task.Run(() => this._homepageDBContext.HomePages.FirstOrDefault(q => q.LanguageCode.Equals(request.LangCode)));
+            if (homeDB != null)
             {
-                Title = this._homepageContext,
-                Subtitle = this._homepageContext + " Subtitle",
-                Descrption = this._homepageContext + " Description"
-            };
-            return await Task.Run(() => QueryOut<HomePageOutput>.GenerateResult(result));
+                var result = new HomePageOutput {
+                    Title= homeDB.Title,
+                    Subtitle = homeDB.SubTitle,
+                    Descrption = homeDB.Description
+                };
+                return QueryOut<HomePageOutput>.GenerateResult(result);
+            }
+            else
+            {
+                return QueryOut<HomePageOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.NotFound, "Could not retrieve requested homepage"));
+            }
         }
     }
 }

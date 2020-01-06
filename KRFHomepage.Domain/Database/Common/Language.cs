@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using KRFHomepage.Domain.Database.Homepage;
 using KRFHomepage.Domain.Database.Translations;
 
 namespace KRFHomepage.Domain.Database.Common
@@ -10,6 +11,7 @@ namespace KRFHomepage.Domain.Database.Common
         public string Code { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Translation> Translations { get; set; }
+        public virtual HomePageData HomePageData { get; set; }
+        public virtual ICollection<Translation> Translations { get; set; }        
     }
 }

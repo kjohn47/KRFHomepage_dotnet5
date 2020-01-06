@@ -3,14 +3,16 @@ using KRFHomepage.Infrastructure.Database.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KRFHomepage.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(HomepageDBContext))]
-    partial class HomepageDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200106171521_InitializeHomepageContext")]
+    partial class InitializeHomepageContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
