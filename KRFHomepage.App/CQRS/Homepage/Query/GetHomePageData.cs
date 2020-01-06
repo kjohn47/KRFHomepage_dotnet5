@@ -4,22 +4,23 @@ using KRFCommon.CQRS.Query;
 using KRFHomepage.Infrastructure.Database.DBContext;
 using System.Linq;
 using KRFCommon.CQRS.Common;
+using KRFHomepage.App.DatabaseHelper;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {
-        private readonly HomepageDBContext _homepageDBContext;
+        private readonly HomepageDatabaseQuery _homePageQuery;
         
-        public GetHomePageData(HomepageDBContext homepageDBContext)
+        public GetHomePageData(HomepageDatabaseQuery homePageQuery)
         {
-            this._homepageDBContext = homepageDBContext;
-        }   
+            this._homePageQuery = homePageQuery;
+        }  
 
         public async Task<IQueryOut<HomePageOutput>> QueryAsync(HomePageInput request)
         {
 
-            var homeDB = await Task.Run(() => this._homepageDBContext.HomePages.FirstOrDefault(q => q.LanguageCode.Equals(request.LangCode)));
+            var homeDB = await this._homePageQuery.GetHomePageDataAsync(request.LangCode);
             if (homeDB != null)
             {
                 var result = new HomePageOutput {

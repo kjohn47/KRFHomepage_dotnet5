@@ -1,4 +1,5 @@
 ﻿using KRFCommon.CQRS.Query;
+using KRFHomepage.App.DatabaseHelper;
 using KRFHomepage.Domain.CQRS.Translations.Query;
 using KRFHomepage.Domain.Database.Translations;
 using KRFHomepage.Infrastructure.Database.DBContext;
@@ -11,25 +12,16 @@ namespace KRFHomepage.App.CQRS.Translations.Query
 {
     public class GetAppTranslations : IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>>
     {
-        private readonly HomepageDBContext _homepageDBContext;               
+        private readonly TranslationsDatabaseQuery _translationQuery;               
 
-        public GetAppTranslations(HomepageDBContext homepageDBContext)
+        public GetAppTranslations(TranslationsDatabaseQuery translationQuery)
         {
-            this._homepageDBContext = homepageDBContext;
+            this._translationQuery = translationQuery;
         }
         
         public async Task<IQueryOut<Dictionary<string, Dictionary<string, string>>>> QueryAsync(TranslationRequest request)
         {
-            var translatedText = await this._homepageDBContext.Categories
-                .Include(x => x.Translations)
-                .Select( x => new TranslationCategory
-                {
-                    Value = x.Value,
-                    Translations = x.Translations
-                        .Where(z => z.LanguageCode.Equals(request.LangCode))
-                        .ToList()
-                })
-                .ToListAsync();
+            var translatedText = await this._translationQuery.GetTranslationDataAsync(request.LangCode);
 
             Dictionary<string, Dictionary<string, string>> response = translatedText.Select( x => new KeyValuePair<string, Dictionary<string, string>> (
                 x.Value,
