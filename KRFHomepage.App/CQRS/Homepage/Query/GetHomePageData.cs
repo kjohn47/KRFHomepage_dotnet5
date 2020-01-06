@@ -5,14 +5,16 @@ using System.Linq;
 using KRFCommon.CQRS.Query;
 using KRFCommon.CQRS.Common;
 using KRFCommon.Context;
+using Newtonsoft.Json;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput[]>
     {
+        private IUserContext _userContext;
         public GetHomePageData( IUserContext userContext )
         {
-
+            this._userContext = userContext;
         }
 
         private readonly string[] Summaries = new[]
@@ -27,7 +29,8 @@ namespace KRFHomepage.App.CQRS.Homepage.Query
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = this.Summaries[rng.Next(this.Summaries.Length)]
+                Summary = this.Summaries[rng.Next(this.Summaries.Length)],
+                UserData = this._userContext != null && this._userContext.Claim != Claims.NotLogged ? JsonConvert.SerializeObject(this._userContext) : "No User"
             })
             .ToArray();
         }
