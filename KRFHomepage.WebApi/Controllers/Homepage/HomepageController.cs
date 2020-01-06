@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using KRFCommon.Context;
 using KRFCommon.Controller;
 using KRFCommon.CQRS.Query;
 using KRFHomepage.Domain.CQRS.Homepage.Query;
@@ -13,30 +12,13 @@ namespace WebApi.Controllers.Homepage
     [Route("Homepage/")]
     public class HomepageController : KRFController
     {
-        [HttpGet("GetData")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof( HomePageOutput[] ))]
-        public async Task<IActionResult> GetData(
-                [FromServices] IQuery<HomePageInput, HomePageOutput[]> query )
+        [HttpGet("{langCode}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof( HomePageOutput ))]        
+        public async Task<IActionResult> Get(
+            [FromServices] IQuery<HomePageInput, HomePageOutput> query,
+            [FromRoute] string langCode )
         {
-            return await this.ExecuteAsyncQuery(new HomePageInput(), query);
-        }
-
-        [Authorize]
-        [HttpGet("GetDataAuth")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(HomePageOutput[]))]
-        public async Task<IActionResult> GetDataAuth(
-        [FromServices] IQuery<HomePageInput, HomePageOutput[]> query)
-        {
-            return await this.ExecuteAsyncQuery(new HomePageInput(), query);
-        }
-
-        [Authorize(Policies.Admin)]
-        [HttpGet("GetDataAuthAdmin")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(HomePageOutput[]))]
-        public async Task<IActionResult> GetDataAuthAdmin(
-        [FromServices] IQuery<HomePageInput, HomePageOutput[]> query)
-        {
-            return await this.ExecuteAsyncQuery(new HomePageInput(), query);
+            return await this.ExecuteAsyncQuery(new HomePageInput( langCode ), query);
         }
     }
 }

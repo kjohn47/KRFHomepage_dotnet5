@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Sample\Command\" />
     <Folder Include="CQRS\Homepage\Command\" />
     <Folder Include="Common\" />
     <Folder Include="CQRS\Translations\Command\" />
