@@ -1,12 +1,12 @@
 ﻿using KRFHomepage.Domain.Constants;
 
-namespace KRFHomepage.Domain.CQRS.Homepage.Query
+namespace KRFHomepage.Domain.CQRS.Translations.Query
 {
-    public class HomePageInput
+    public class TranslationRequest
     {
-        public HomePageInput(string langCode)
+        public TranslationRequest( string langCode )
         {
-            if (string.IsNullOrEmpty(langCode))
+            if( string.IsNullOrEmpty( langCode ) )
             {
                 this.LangCode = Language.PtCode;
             }

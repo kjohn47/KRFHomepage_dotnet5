@@ -1,36 +1,37 @@
-﻿using System;
-using KRFHomepage.Domain.CQRS.Homepage.Query;
+﻿using KRFHomepage.Domain.CQRS.Homepage.Query;
 using System.Threading.Tasks;
-using System.Linq;
 using KRFCommon.CQRS.Query;
-using KRFCommon.Context;
+using KRFCommon.CQRS.Common;
+using KRFHomepage.App.DatabaseHelper;
 
 namespace KRFHomepage.App.CQRS.Homepage.Query
 {
-    class GetHomePageData : IQuery<HomePageInput, HomePageOutput[]>
+    public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {
-        private readonly string[] Summaries = new[]
+        private readonly HomepageDatabaseQuery _homePageQuery;
+        
+        public GetHomePageData(HomepageDatabaseQuery homePageQuery)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            this._homePageQuery = homePageQuery;
+        }  
 
-        private HomePageOutput[] MakeDataResult()
+        public async Task<IQueryOut<HomePageOutput>> QueryAsync(HomePageInput request)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new HomePageOutput
+
+            var homeDB = await this._homePageQuery.GetHomePageDataAsync(request.LangCode);
+            if (homeDB != null)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = this.Summaries[rng.Next(this.Summaries.Length)]
-            })
-            .ToArray();
-        }
-
-        public async Task<IQueryOut<HomePageOutput[]>> QueryAsync(HomePageInput request)
-        {
-            var result = await Task.Run( () => this.MakeDataResult() );
-            return QueryOut<HomePageOutput[]>.GenerateResult(result);
-            //return QueryOut<HomePageOutput[]>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.BadRequest, "Error Ocurred"));
+                var result = new HomePageOutput {
+                    Title = homeDB.Title,
+                    Subtitle = homeDB.SubTitle,
+                    Descrption = homeDB.Description
+                };
+                return QueryOut<HomePageOutput>.GenerateResult(result);
+            }
+            else
+            {
+                return QueryOut<HomePageOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.NotFound, "Could not retrieve requested homepage"));
+            }
         }
     }
 }
