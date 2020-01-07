@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Sample\Command\" />
     <Folder Include="CQRS\Homepage\Command\" />
     <Folder Include="Common\" />
     <Folder Include="CQRS\Translations\Command\" />
-    <Folder Include="CQRS\Translations\Query\" />
-    <Folder Include="Database\Homepage\" />
-    <Folder Include="Database\Translation\" />
   </ItemGroup>
 
 </Project>
