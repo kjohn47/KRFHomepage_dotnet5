@@ -1,9 +1,6 @@
 ﻿using KRFCommon.CQRS.Query;
 using KRFHomepage.App.DatabaseHelper;
 using KRFHomepage.Domain.CQRS.Translations.Query;
-using KRFHomepage.Domain.Database.Translations;
-using KRFHomepage.Infrastructure.Database.DBContext;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +31,7 @@ namespace KRFHomepage.App.CQRS.Translations.Query
                 ))
                 .ToDictionary( z => z.Key, z => z.Value );
             
-            return await Task.Run(() => QueryOut<Dictionary<string, Dictionary<string, string>>>.GenerateResult(response));
+            return QueryOut<Dictionary<string, Dictionary<string, string>>>.GenerateResult(response);
         }   
     }
 }

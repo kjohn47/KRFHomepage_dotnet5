@@ -1,5 +1,6 @@
 ﻿using KRFHomepage.Domain.Database.Homepage;
 using KRFHomepage.Infrastructure.Database.DBContext;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace KRFHomepage.App.DatabaseHelper
 
         public async Task<HomePageData> GetHomePageDataAsync( string langCode )
         {
-            return await Task.Run(() => this._homepageDBContext.HomePages.FirstOrDefault(q => q.LanguageCode.Equals(langCode)));
+            return await this._homepageDBContext.HomePages.FirstOrDefaultAsync(q => q.LanguageCode.Equals(langCode));
         }
     }
 }

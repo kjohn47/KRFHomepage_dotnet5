@@ -1,8 +1,6 @@
 ﻿using KRFHomepage.Domain.CQRS.Homepage.Query;
 using System.Threading.Tasks;
 using KRFCommon.CQRS.Query;
-using KRFHomepage.Infrastructure.Database.DBContext;
-using System.Linq;
 using KRFCommon.CQRS.Common;
 using KRFHomepage.App.DatabaseHelper;
 
@@ -24,7 +22,7 @@ namespace KRFHomepage.App.CQRS.Homepage.Query
             if (homeDB != null)
             {
                 var result = new HomePageOutput {
-                    Title= homeDB.Title,
+                    Title = homeDB.Title,
                     Subtitle = homeDB.SubTitle,
                     Descrption = homeDB.Description
                 };
