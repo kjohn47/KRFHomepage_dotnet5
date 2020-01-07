@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.0.1.5" />
+    <PackageReference Include="KRFCommon" Version="1.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.0" />
