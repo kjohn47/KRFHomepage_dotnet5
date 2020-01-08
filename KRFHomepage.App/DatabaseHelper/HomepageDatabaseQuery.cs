@@ -16,7 +16,7 @@ namespace KRFHomepage.App.DatabaseHelper
 
         public async Task<HomePageData> GetHomePageDataAsync( string langCode )
         {
-            return await this._homepageDBContext.HomePages.FirstOrDefaultAsync(q => q.LanguageCode.Equals(langCode));
+            return await this._homepageDBContext.HomePages.AsNoTracking().FirstOrDefaultAsync(q => q.LanguageCode.Equals(langCode));
         }
     }
 }
