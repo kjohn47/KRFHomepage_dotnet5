@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -12,19 +13,29 @@ namespace KRFHomepage.WebApi
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(logging =>
+            Host.CreateDefaultBuilder(args)                
+                .ConfigureLogging((c,logging) =>
                 {
-                    logging.ClearProviders();
-                    logging.AddConsole();
+                    if (c.HostingEnvironment.IsDevelopment())
+                    {
+                        logging.ClearProviders()
+                        .AddConsole()
+                        .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information)
+                        .AddEventLog();                      
+                    }
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(o =>
+                    webBuilder.UseKestrel((c, o) =>
                     {
+                        if(c.HostingEnvironment.IsDevelopment())
+                        {
+                            o.ListenLocalhost(14747, l => l.UseConnectionLogging().UseHttps( h => h.AllowAnyClientCertificate()));
+                            o.ListenLocalhost(4747, l => l.UseConnectionLogging());
+                        }
                         //o.Listen(IPAddress.Any, 14747);
-                    });
-                    webBuilder.UseStartup<Startup>();
+                    })
+                    .UseStartup<Startup>();
                 });
     }
 }

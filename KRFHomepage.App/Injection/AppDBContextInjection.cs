@@ -3,7 +3,6 @@ using KRFHomepage.Infrastructure.Database.DBContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace KRFHomepage.App.Injection
 {
@@ -15,8 +14,7 @@ namespace KRFHomepage.App.Injection
             {
                 opt.UseSqlServer(connectionString);
             });
-            services.AddLogging( builder => builder.AddConsole().AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information));
-            services.BuildServiceProvider().GetService<ILoggerFactory>();
+
             services.AddScoped<HomepageDatabaseQuery>();
             services.AddScoped<TranslationsDatabaseQuery>();
         }

@@ -12,18 +12,20 @@ namespace KRFHomepage.WebApi
 {
     public class Startup
     {       
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.Configuration = configuration;
             this._apiName = configuration[AppConstants.AppName_Key];
             this._tokenIdentifier = configuration[AppConstants.TokenIdentifier_Key];
             this._tokenKey = configuration[AppConstants.TokenKey_Key];
+            this.HostingEnvironment = env;
         }
 
         private readonly string _apiName;
         private readonly string _tokenIdentifier;
         private readonly string _tokenKey;
 
+        public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
