@@ -10,6 +10,7 @@ namespace KRFHomepage.App.Injection
     {
         public static void InjectDBContext(IServiceCollection services, string connectionString)
         {
+            services.AddEntityFrameworkSqlServer();
             services.AddDbContext<HomepageDBContext>(opt =>
             {
                 opt.UseSqlServer(connectionString);
