@@ -8,6 +8,8 @@
         public const string DefaultConStr = "DefaultConnection";
         public const string Logging = "Logging";
         public const string LogExceptionOnPrd = "LogExceptionOnPrd";
-        public const string MigrationAssembly = "MigrationAssembly"; 
+        public const string MigrationAssembly = "MigrationAssembly";
+        public const string KestrelConfigurationHttpPort = "KestrelConfiguration:HttpPort";
+        public const string KestrelConfigurationHttpsPort = "KestrelConfiguration:HttpsPort";
     }
 }
