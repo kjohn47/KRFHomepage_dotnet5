@@ -16,7 +16,7 @@ Migrations
 		dotnet tool install --global dotnet-ef
 		go to infrastructure project [KRFHomepage.Infrastructure]
 		run:
-		dotnet ef  migrations add [migration_name] --context Database.DBContext.TranslationsContext -o KRFHomepage.Infrastructure/Database/Migrations
+		dotnet ef  migrations add [migration_name] --context Database.DBContext.[ContextMain] -o KRFHomepage.Infrastructure/Database/Migrations
 		.
 OR RUN this:
 --> Add-Migration [migration_name] -OutputDir "Database/Migrations" -Project KRFHomepage.Infrastructure

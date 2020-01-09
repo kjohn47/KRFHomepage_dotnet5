@@ -20,7 +20,7 @@ namespace KRFHomepage.WebApi
             this._apiName = configuration[AppConstants.AppName_Key]?? string.Empty;
             this._tokenIdentifier = configuration[AppConstants.TokenIdentifier_Key]?? string.Empty;
             this._tokenKey = configuration[AppConstants.TokenKey_Key]?? string.Empty;
-            this.HostingEnvironment = env;            
+            this.HostingEnvironment = env;
         }
 
         private readonly string _apiName;
@@ -51,7 +51,9 @@ namespace KRFHomepage.WebApi
 
             SwaggerInit.ServiceInit(services, this._apiName, this._tokenIdentifier);
 
-            AppDBContextInjection.InjectDBContext(services, this.Configuration.GetConnectionString(AppConstants.DefaultConStr));
+            var connStr = this.Configuration.GetConnectionString(AppConstants.DefaultConStr);
+            var migAssemb = this.Configuration[AppConstants.MigrationAssembly] ?? string.Empty;
+            AppDBContextInjection.InjectDBContext(services, connStr, migAssemb);
             AppQueryInjection.InjectQuery(services);
             AppCommandInjection.InjectCommand(services);
             AppProxyInjection.InjectProxy(services);
