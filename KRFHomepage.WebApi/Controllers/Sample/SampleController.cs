@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using KRFCommon.Context;
 using KRFCommon.Controller;
+using KRFCommon.CQRS.Command;
 using KRFCommon.CQRS.Query;
+using KRFHomepage.Domain.CQRS.Sample.Command;
 using KRFHomepage.Domain.CQRS.Sample.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,15 @@ namespace WebApi.Controllers.Sample
         [FromServices] IQuery<SampleInput, SampleOutput[]> query)
         {
             return await this.ExecuteAsyncQuery(new SampleInput(), query);
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type =typeof(SampleCommandOutput))]
+        public async Task<IActionResult> PostSampleData(
+            [FromBody] SampleCommandInput request,
+            [FromServices] ICommand<SampleCommandInput, SampleCommandOutput> command)
+        {
+            return await this.ExecuteAsyncCommand(request, command);
         }
     }
 }

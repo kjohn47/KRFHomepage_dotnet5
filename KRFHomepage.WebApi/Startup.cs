@@ -62,13 +62,30 @@ namespace KRFHomepage.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            bool enableLogs = bool.Parse(this.Configuration[AppConstants.LogsOnPrd] ?? "false");
+            bool reqCtxEnableRead = bool.Parse(this.Configuration[AppConstants.ReqCtxEnableRead] ?? "false");
+            bool reqCtxMemBufferOnly = bool.Parse(this.Configuration[AppConstants.ReqCtxMemBufferOnly] ?? "false");
+            int reqCtxBufferSize = int.Parse(this.Configuration[AppConstants.ReqCtxBufferSize] ?? "30000");
+
             if (this.HostingEnvironment.IsDevelopment())
-            {
+            {                
                 app.UseDeveloperExceptionPage();
+                enableLogs = true;
+            }                                     
+
+            if (enableLogs && reqCtxEnableRead)
+            {                
+                app.UseMiddleware<KRFBodyRewindMiddleware>(reqCtxBufferSize, reqCtxMemBufferOnly);
             }
-            
-            bool logExceptionPrd = bool.Parse(this.Configuration[AppConstants.LogExceptionOnPrd] ?? "false");
-            KRFExceptionHandlerMiddleware.Configure(app, loggerFactory, this.HostingEnvironment.IsDevelopment() || logExceptionPrd, this._apiName, this._tokenIdentifier);
+
+            if (reqCtxEnableRead && reqCtxMemBufferOnly)
+            {
+                KRFExceptionHandlerMiddleware.Configure(app, loggerFactory, enableLogs, this._apiName, this._tokenIdentifier, reqCtxBufferSize);
+            }
+            else
+            {
+                KRFExceptionHandlerMiddleware.Configure(app, loggerFactory, enableLogs, this._apiName, this._tokenIdentifier);
+            }
 
             app.UseHttpsRedirection();
 
