@@ -22,12 +22,18 @@ namespace KRFHomepage.WebApi
                         int httpsPort = int.Parse(c.Configuration[AppConstants.KestrelConfigurationHttpsPort] ?? "14747");
                         if (c.HostingEnvironment.IsDevelopment())
                         {
-                            o.ListenLocalhost(httpsPort, l => l.UseHttps( h => h.AllowAnyClientCertificate()));
+                            o.ListenLocalhost(httpsPort, l => l.UseHttps( h => {
+                                h.AllowAnyClientCertificate();
+                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                            }));
                             o.ListenLocalhost(httpPort);
                         }
                         else
                         {
-                            o.Listen(IPAddress.Any, httpsPort, l => l.UseHttps( h => h.AllowAnyClientCertificate()));
+                            o.Listen(IPAddress.Any, httpsPort, l => l.UseHttps(h => {
+                                h.AllowAnyClientCertificate();
+                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                            }));
                             o.Listen(IPAddress.Any, httpPort);
                         }
                     })
