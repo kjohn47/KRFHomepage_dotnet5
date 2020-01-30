@@ -35,10 +35,11 @@ namespace KRFHomepage.App.CQRS.Sample.Query
             .ToArray();
         }
 
-        public async Task<IQueryOut<SampleOutput[]>> QueryAsync(SampleInput request)
+        public async Task<IResponseOut<SampleOutput[]>> QueryAsync(SampleInput request)
         {
-            var result = await Task.Run( () => this.MakeDataResult() );
-            return QueryOut<SampleOutput[]>.GenerateResult(result);
+            await Task.Yield();
+            var result = this.MakeDataResult();
+            return ResponseOut<SampleOutput[]>.GenerateResult(result);
             //return QueryOut<HomePageOutput[]>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.BadRequest, "Error Ocurred"));
         }
     }

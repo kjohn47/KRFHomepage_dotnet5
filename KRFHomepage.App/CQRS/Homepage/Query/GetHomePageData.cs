@@ -15,9 +15,8 @@ namespace KRFHomepage.App.CQRS.Homepage.Query
             this._homePageQuery = homePageQuery;
         }  
 
-        public async Task<IQueryOut<HomePageOutput>> QueryAsync(HomePageInput request)
+        public async Task<IResponseOut<HomePageOutput>> QueryAsync(HomePageInput request)
         {
-
             var homeDB = await this._homePageQuery.GetHomePageDataAsync(request.LangCode);
             if (homeDB != null)
             {
@@ -26,11 +25,11 @@ namespace KRFHomepage.App.CQRS.Homepage.Query
                     Subtitle = homeDB.SubTitle,
                     Descrption = homeDB.Description
                 };
-                return QueryOut<HomePageOutput>.GenerateResult(result);
+                return ResponseOut<HomePageOutput>.GenerateResult(result);
             }
             else
             {
-                return QueryOut<HomePageOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.NotFound, "Could not retrieve requested homepage"));
+                return ResponseOut<HomePageOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.NotFound, "Could not retrieve requested homepage", ResponseErrorType.Database));
             }
         }
     }
