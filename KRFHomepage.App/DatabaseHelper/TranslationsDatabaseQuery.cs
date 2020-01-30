@@ -29,6 +29,7 @@ namespace KRFHomepage.App.DatabaseHelper
                        .Where(z => z.LanguageCode.Equals(langCode))
                        .ToList()
                 })
+                .AsNoTracking()
                 .ToListAsync();
         }
 

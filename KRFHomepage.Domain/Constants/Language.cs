@@ -2,6 +2,6 @@
 {
     public static class Language
     {
-        public static string PtCode { get; internal set; }
+        public const string PtCode = "PT";
     }
 }

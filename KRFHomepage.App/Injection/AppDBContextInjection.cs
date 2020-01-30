@@ -8,9 +8,17 @@ namespace KRFHomepage.App.Injection
 {
     public static class AppDBContextInjection
     {
-        public static void InjectDBContext(IServiceCollection services, string connectionString)
+        public static void InjectDBContext(IServiceCollection services, string connectionString, string migrationAssembly)
         {
-            services.AddDbContext<HomepageDBContext>( opt => opt.UseSqlServer(connectionString));
+            services.AddEntityFrameworkSqlServer();
+            services.AddDbContext<HomepageDBContext>(opt =>
+            {
+                opt.UseSqlServer(connectionString, x =>
+                {
+                    x.MigrationsAssembly(migrationAssembly);
+                });
+            });
+
             services.AddScoped<HomepageDatabaseQuery>();
             services.AddScoped<TranslationsDatabaseQuery>();
         }

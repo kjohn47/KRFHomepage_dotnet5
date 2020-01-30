@@ -1,4 +1,5 @@
-﻿using KRFCommon.CQRS.Query;
+﻿using KRFCommon.CQRS.Common;
+using KRFCommon.CQRS.Query;
 using KRFHomepage.App.DatabaseHelper;
 using KRFHomepage.Domain.CQRS.Translations.Query;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace KRFHomepage.App.CQRS.Translations.Query
             this._translationQuery = translationQuery;
         }
         
-        public async Task<IQueryOut<Dictionary<string, Dictionary<string, string>>>> QueryAsync(TranslationRequest request)
+        public async Task<IResponseOut<Dictionary<string, Dictionary<string, string>>>> QueryAsync(TranslationRequest request)
         {
             var translatedText = await this._translationQuery.GetTranslationDataAsync(request.LangCode);
 
@@ -31,7 +32,7 @@ namespace KRFHomepage.App.CQRS.Translations.Query
                 ))
                 .ToDictionary( z => z.Key, z => z.Value );
             
-            return QueryOut<Dictionary<string, Dictionary<string, string>>>.GenerateResult(response);
+            return ResponseOut<Dictionary<string, Dictionary<string, string>>>.GenerateResult(response);
         }   
     }
 }
