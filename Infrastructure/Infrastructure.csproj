@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>KRFHomepage.Infrastructure</AssemblyName>
+    <RootNamespace>KRFHomepage.Infrastructure</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.2.0.3" />
+    <PackageReference Include="KRFCommon" Version="1.2.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.0" />
@@ -26,7 +28,7 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <ProjectReference Include="..\KRFHomepage.Domain\KRFHomepage.Domain.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
