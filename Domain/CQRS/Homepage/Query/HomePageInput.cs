@@ -1,8 +1,10 @@
 ﻿namespace KRFHomepage.Domain.CQRS.Homepage.Query
 {
+    using KRFCommon.CQRS.Query;
+
     using KRFHomepage.Domain.Constants;
 
-    public class HomePageInput
+    public class HomePageInput: IQueryRequest
     {
         public HomePageInput(string langCode)
         {

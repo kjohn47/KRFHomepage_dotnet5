@@ -15,13 +15,22 @@
     [Route("Translations/")]
     public class TranslationsController : KRFController
     {
+        [HttpGet("")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TranslationResponse))]
+        public async Task<IActionResult> GetDefault(
+        [FromServices] IQuery<TranslationRequest, TranslationResponse> query)
+        {
+            return await this.ExecuteAsyncQuery(new TranslationRequest(null), query);
+        }
+
         [HttpGet("{langCode}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Dictionary<string, Dictionary<string, string>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TranslationResponse))]
         public async Task<IActionResult> Get(
-                [FromServices] IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>> query,
-                [FromRoute] string langCode)
-        {            
-            return await this.ExecuteAsyncQuery(new TranslationRequest(langCode.ToUpperInvariant()), query);
+        [FromServices] IQuery<TranslationRequest, TranslationResponse> query,
+        [FromRoute] string langCode,
+        [FromQuery] bool? getKeys)
+        {
+            return await this.ExecuteAsyncQuery(new TranslationRequest(langCode.ToUpperInvariant(), getKeys.HasValue && getKeys.Value), query);
         }
     }
 }

@@ -35,7 +35,15 @@
                 .ToListAsync();
         }
 
-        public async Task<QueryCommand> AddNewLanguageAsync( string langCode, string langDescription )
+        public async Task<IEnumerable<string>> GetLanguageCodesAsync()
+        {
+            return await this._homepageDBContext.Languages
+                .AsNoTracking()
+                .Select(x => x.Code)
+                .ToListAsync();
+        }
+
+        public async Task<IQueryCommand> AddNewLanguageAsync( string langCode, string langDescription )
         {
             if (!string.IsNullOrEmpty(langCode) && !string.IsNullOrEmpty(langDescription) && langCode.Length == 2)
             {               
@@ -43,7 +51,7 @@
                 {
                     if( await this._homepageDBContext.Languages.AnyAsync( x => x.Code.Equals( langCode ) ) )
                     {
-                        return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Language code already exists" };
+                        return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Language code already exists" };
                     }
 
                     Language newLang = new Language
@@ -57,18 +65,18 @@
                 }
                 catch( Exception ex )
                 {
-                    return new QueryCommand { Result = QueryResult.Error, ResultDescription = ex.Message };
+                    return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
 
-                return new QueryCommand { Result = QueryResult.Success, ResultDescription = "Success" };
+                return new QueryCommand { Result = QueryResultEnum.Success, ResultDescription = "Success" };
             }
             else
             {
-                return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Missing data or code is too long (max 2 char)" };
+                return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Missing data or code is too long (max 2 char)" };
             }
         }
 
-        public async Task<QueryCommand> AddNewCategoryAsync(string categoryName)
+        public async Task<IQueryCommand> AddNewCategoryAsync(string categoryName)
         {
             if (!string.IsNullOrEmpty(categoryName))
             {               
@@ -76,7 +84,7 @@
                 {
                     if (await this._homepageDBContext.Categories.AnyAsync(x => x.Value.Equals(categoryName)))
                     {
-                        return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Category already exists" };
+                        return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Category already exists" };
                     }
 
                     TranslationCategory newCategory = new TranslationCategory
@@ -89,18 +97,18 @@
                 }
                 catch (Exception ex)
                 {
-                    return new QueryCommand { Result = QueryResult.Error, ResultDescription = ex.Message };
+                    return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
 
-                return new QueryCommand { Result = QueryResult.Success, ResultDescription = "Success" };
+                return new QueryCommand { Result = QueryResultEnum.Success, ResultDescription = "Success" };
             }
             else
             {
-                return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Missing data" };
+                return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Missing data" };
             }
         }
 
-        public async Task<QueryCommand> AddNewTokenAsync(string token)
+        public async Task<IQueryCommand> AddNewTokenAsync(string token)
         {
             if (!string.IsNullOrEmpty(token))
             {
@@ -108,7 +116,7 @@
                 {
                     if (await this._homepageDBContext.Tokens.AnyAsync(x => x.Value.Equals(token)))
                     {
-                        return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Token already exists" };
+                        return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Token already exists" };
                     }
 
                     Token newToken = new Token
@@ -121,18 +129,18 @@
                 }
                 catch (Exception ex)
                 {
-                    return new QueryCommand { Result = QueryResult.Error, ResultDescription = ex.Message };
+                    return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
 
-                return new QueryCommand { Result = QueryResult.Success, ResultDescription = "Success" };
+                return new QueryCommand { Result = QueryResultEnum.Success, ResultDescription = "Success" };
             }
             else
             {
-                return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Missing data" };
+                return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Missing data" };
             }
         }
 
-        public async Task<QueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation)
+        public async Task<IQueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation)
         {
             if (!string.IsNullOrEmpty(langCode) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(translation))
             {
@@ -140,7 +148,7 @@
                 {
                     if (await this._homepageDBContext.Translations.AnyAsync(x => x.LanguageCode.Equals(langCode) && x.TokenValue.Equals(token) && x.TranslationCategoryValue.Equals(category)))
                     {
-                        return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Translation already exists" };
+                        return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Translation already exists" };
                     }
 
                     Translation newTranslation = new Translation
@@ -156,14 +164,14 @@
                 }
                 catch (Exception ex)
                 {
-                    return new QueryCommand { Result = QueryResult.Error, ResultDescription = ex.Message };
+                    return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
 
-                return new QueryCommand { Result = QueryResult.Success, ResultDescription = "Success" };
+                return new QueryCommand { Result = QueryResultEnum.Success, ResultDescription = "Success" };
             }
             else
             {
-                return new QueryCommand { Result = QueryResult.Error, ResultDescription = "Missing data" };
+                return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Missing data" };
             }
         }
     }
