@@ -1,6 +1,8 @@
 ﻿namespace KRFHomepage.Domain.CQRS.Homepage.Query
 {
-    public class HomePageOutput
+    using KRFCommon.CQRS.Query;
+
+    public class HomePageOutput: IQueryResponse
     {
         public string Title { get; set; }
         public string Subtitle { get; set; }

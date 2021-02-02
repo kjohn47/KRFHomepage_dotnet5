@@ -10,13 +10,15 @@
     {
         Task<List<TranslationCategory>> GetTranslationDataAsync(string langCode);
 
-        Task<QueryCommand> AddNewLanguageAsync(string langCode, string langDescription);
+        Task<IEnumerable<string>> GetLanguageCodesAsync();
 
-        Task<QueryCommand> AddNewCategoryAsync(string categoryName);
+        Task<IQueryCommand> AddNewLanguageAsync(string langCode, string langDescription);
 
-        Task<QueryCommand> AddNewTokenAsync(string token);
+        Task<IQueryCommand> AddNewCategoryAsync(string categoryName);
 
-        Task<QueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation);
+        Task<IQueryCommand> AddNewTokenAsync(string token);
+
+        Task<IQueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation);
 
     }
 }
