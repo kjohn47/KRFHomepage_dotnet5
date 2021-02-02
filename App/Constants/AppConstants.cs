@@ -6,6 +6,8 @@
         public const string TokenIdentifier_Key = "AppConfiguration:TokenIdentifier";
         public const string TokenKey_Key = "AppConfiguration:TokenKey";
         public const string DefaultConStr = "DefaultConnection";
+        public const string UseLocalDB = "UseLocalDB";
+        public const string ApiDBFolder = "ApiDBFolder";
         public const string Logging = "Logging";
         public const string LogsOnPrd = "LogsOnPrd";
         public const string MigrationAssembly = "MigrationAssembly";

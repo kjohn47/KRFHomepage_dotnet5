@@ -1,20 +1,23 @@
-﻿using KRFCommon.CQRS.Common;
-using KRFCommon.CQRS.Query;
-using KRFHomepage.App.DatabaseHelper;
-using KRFHomepage.Domain.CQRS.Translations.Query;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace KRFHomepage.App.CQRS.Translations.Query
+﻿namespace KRFHomepage.App.CQRS.Translations.Query
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using KRFCommon.CQRS.Common;
+    using KRFCommon.CQRS.Query;
+
+    using KRFHomepage.App.DatabaseQueries;
+    using KRFHomepage.Domain.CQRS.Translations.Query;
+
     public class GetAppTranslations : IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>>
     {
-        private readonly TranslationsDatabaseQuery _translationQuery;               
+        private readonly ITranslationsDatabaseQuery _translationQuery;               
 
-        public GetAppTranslations(TranslationsDatabaseQuery translationQuery)
+        public GetAppTranslations(Lazy<ITranslationsDatabaseQuery> translationQuery)
         {
-            this._translationQuery = translationQuery;
+            this._translationQuery = translationQuery.Value;
         }
         
         public async Task<IResponseOut<Dictionary<string, Dictionary<string, string>>>> QueryAsync(TranslationRequest request)

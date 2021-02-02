@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace KRFHomepage.Infrastructure.Database.Migrations
+namespace KRFHomepage.Infrastructure.Migrations
 {
-    public partial class InitializeTranslationContext : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 name: "categories",
                 columns: table => new
                 {
-                    Value = table.Column<string>(nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -21,8 +21,8 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 name: "languages",
                 columns: table => new
                 {
-                    Code = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 30, nullable: false)
+                    Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,7 +33,7 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 name: "tokens",
                 columns: table => new
                 {
-                    Value = table.Column<string>(nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,19 +41,45 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "homepages",
+                columns: table => new
+                {
+                    LanguageCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    SubTitle = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_homepages", x => x.LanguageCode);
+                    table.ForeignKey(
+                        name: "FK_homepages_languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "languages",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "translations",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TokenValue = table.Column<string>(nullable: false),
-                    LanguageCode = table.Column<string>(nullable: false),
-                    TranslationCategoryValue = table.Column<string>(nullable: false),
-                    Text = table.Column<string>(nullable: false)
+                    TokenValue = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LanguageCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TranslationCategoryValue = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_translations", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_translations_categories_TranslationCategoryValue",
+                        column: x => x.TranslationCategoryValue,
+                        principalTable: "categories",
+                        principalColumn: "Value",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_translations_languages_LanguageCode",
                         column: x => x.LanguageCode,
@@ -64,12 +90,6 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                         name: "FK_translations_tokens_TokenValue",
                         column: x => x.TokenValue,
                         principalTable: "tokens",
-                        principalColumn: "Value",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_translations_categories_TranslationCategoryValue",
-                        column: x => x.TranslationCategoryValue,
-                        principalTable: "categories",
                         principalColumn: "Value",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -128,11 +148,20 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "homepages",
+                columns: new[] { "LanguageCode", "Description", "SubTitle", "Title" },
+                values: new object[,]
+                {
+                    { "PT", "Bem Vindo ao KRF, isto é uma framework react para fazer desenvolvimento divertido :)", "A página principal do KRF com microserviços", "KJohn React Framework" },
+                    { "EN", "Welcome to KRF, this is a react framework to make some fun dev :)", "The KRF homepage with microservices", "KJohn React Framework" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "translations",
                 columns: new[] { "ID", "LanguageCode", "Text", "TokenValue", "TranslationCategoryValue" },
                 values: new object[,]
                 {
-                    { 1, "PT", "A Carregar!", "#(loadingText)", "_generic" },
+                    { 21, "PT", "Ter", "#(Tue)", "_datePicker" },
                     { 22, "PT", "Qua", "#(Wed)", "_datePicker" },
                     { 23, "PT", "Qui", "#(Thu)", "_datePicker" },
                     { 24, "PT", "Sex", "#(Fri)", "_datePicker" },
@@ -143,8 +172,8 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                     { 36, "EN", "March", "#(March)", "_datePicker" },
                     { 37, "EN", "April", "#(April)", "_datePicker" },
                     { 38, "EN", "May", "#(May)", "_datePicker" },
-                    { 21, "PT", "Ter", "#(Tue)", "_datePicker" },
                     { 39, "EN", "June", "#(June)", "_datePicker" },
+                    { 40, "EN", "July", "#(July)", "_datePicker" },
                     { 41, "EN", "August", "#(August)", "_datePicker" },
                     { 42, "EN", "September", "#(September)", "_datePicker" },
                     { 43, "EN", "October", "#(October)", "_datePicker" },
@@ -155,10 +184,11 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                     { 48, "EN", "Wed", "#(Wed)", "_datePicker" },
                     { 49, "EN", "Thu", "#(Thu)", "_datePicker" },
                     { 50, "EN", "Fri", "#(Fri)", "_datePicker" },
-                    { 40, "EN", "July", "#(July)", "_datePicker" },
                     { 20, "PT", "Seg", "#(Mon)", "_datePicker" },
                     { 19, "PT", "Dezembro", "#(December)", "_datePicker" },
                     { 18, "PT", "Novembro", "#(November)", "_datePicker" },
+                    { 17, "PT", "Outubro", "#(October)", "_datePicker" },
+                    { 1, "PT", "A Carregar!", "#(loadingText)", "_generic" },
                     { 2, "PT", "Voltar para Homepage", "#(goBackToHome)", "_generic" },
                     { 3, "PT", "Carregue no botão para retomar para a homepage.", "#(goBackToHomeToolTip)", "_generic" },
                     { 4, "PT", "Ver detalhes", "#(cardDetails)", "_generic" },
@@ -170,7 +200,14 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                     { 6, "PT", "Remover", "#(remove)", "_tableText" },
                     { 31, "EN", "Edit", "#(edit)", "_tableText" },
                     { 32, "EN", "Remove", "#(remove)", "_tableText" },
-                    { 7, "PT", "Página de Teste de Componentes", "#(TestPage Title)", "_TestPage" },
+                    { 7, "PT", "Página de Teste de Componentes", "#(TestPage Title)", "_TestPage" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "translations",
+                columns: new[] { "ID", "LanguageCode", "Text", "TokenValue", "TranslationCategoryValue" },
+                values: new object[,]
+                {
                     { 33, "EN", "Component Test Page", "#(TestPage Title)", "_TestPage" },
                     { 8, "PT", "Janeiro", "#(January)", "_datePicker" },
                     { 9, "PT", "Fevereiro", "#(February)", "_datePicker" },
@@ -181,7 +218,6 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
                     { 14, "PT", "Julho", "#(July)", "_datePicker" },
                     { 15, "PT", "Agosto", "#(August)", "_datePicker" },
                     { 16, "PT", "Setembro", "#(September)", "_datePicker" },
-                    { 17, "PT", "Outubro", "#(October)", "_datePicker" },
                     { 51, "EN", "Sat", "#(Sat)", "_datePicker" },
                     { 52, "EN", "Sun", "#(Sun)", "_datePicker" }
                 });
@@ -205,16 +241,19 @@ namespace KRFHomepage.Infrastructure.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "homepages");
+
+            migrationBuilder.DropTable(
                 name: "translations");
+
+            migrationBuilder.DropTable(
+                name: "categories");
 
             migrationBuilder.DropTable(
                 name: "languages");
 
             migrationBuilder.DropTable(
                 name: "tokens");
-
-            migrationBuilder.DropTable(
-                name: "categories");
         }
     }
 }

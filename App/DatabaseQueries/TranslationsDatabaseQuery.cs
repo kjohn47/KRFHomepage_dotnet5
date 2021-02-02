@@ -1,16 +1,18 @@
-﻿using KRFCommon.Database;
-using KRFHomepage.Domain.Database.Common;
-using KRFHomepage.Domain.Database.Translations;
-using KRFHomepage.Infrastructure.Database.DBContext;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace KRFHomepage.App.DatabaseHelper
+﻿namespace KRFHomepage.App.DatabaseQueries
 {
-    public class TranslationsDatabaseQuery
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
+    using KRFCommon.Database;
+
+    using KRFHomepage.Domain.Database.Common;
+    using KRFHomepage.Domain.Database.Translations;
+    using KRFHomepage.Infrastructure.Database.Context;
+
+    public class TranslationsDatabaseQuery : ITranslationsDatabaseQuery
     {
         private readonly HomepageDBContext _homepageDBContext;
         public TranslationsDatabaseQuery(HomepageDBContext homepageDBContext)

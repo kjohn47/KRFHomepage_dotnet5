@@ -1,18 +1,21 @@
-﻿using KRFHomepage.Domain.CQRS.Homepage.Query;
-using System.Threading.Tasks;
-using KRFCommon.CQRS.Query;
-using KRFCommon.CQRS.Common;
-using KRFHomepage.App.DatabaseHelper;
-
-namespace KRFHomepage.App.CQRS.Homepage.Query
+﻿namespace KRFHomepage.App.CQRS.Homepage.Query
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using KRFCommon.CQRS.Query;
+    using KRFCommon.CQRS.Common;
+
+    using KRFHomepage.App.DatabaseQueries;
+    using KRFHomepage.Domain.CQRS.Homepage.Query;    
+
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {
-        private readonly HomepageDatabaseQuery _homePageQuery;
+        private readonly IHomepageDatabaseQuery _homePageQuery;
         
-        public GetHomePageData(HomepageDatabaseQuery homePageQuery)
+        public GetHomePageData(Lazy<IHomepageDatabaseQuery> homePageQuery)
         {
-            this._homePageQuery = homePageQuery;
+            this._homePageQuery = homePageQuery.Value;
         }  
 
         public async Task<IResponseOut<HomePageOutput>> QueryAsync(HomePageInput request)

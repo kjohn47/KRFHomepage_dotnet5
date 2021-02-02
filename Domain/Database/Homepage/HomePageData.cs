@@ -1,9 +1,10 @@
-﻿using KRFHomepage.Domain.Database.Common;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace KRFHomepage.Domain.Database.Homepage
+﻿namespace KRFHomepage.Domain.Database.Homepage
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using KRFHomepage.Domain.Database.Common;
+
     public class HomePageData
     {
         [Key]
