@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\DBFiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="KRFCommon" Version="1.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.2" />

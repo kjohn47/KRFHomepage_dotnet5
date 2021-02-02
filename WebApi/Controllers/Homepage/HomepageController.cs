@@ -1,13 +1,14 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using KRFCommon.Controller;
-using KRFCommon.CQRS.Query;
-using KRFHomepage.Domain.CQRS.Homepage.Query;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace WebApi.Controllers.Homepage
+﻿namespace WebApi.Controllers.Homepage
 {
+    using System.Net;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+
+    using KRFCommon.Controller;
+    using KRFCommon.CQRS.Query;
+
+    using KRFHomepage.Domain.CQRS.Homepage.Query;
+
     [ApiController]
     [Route("Homepage/")]
     public class HomepageController : KRFController

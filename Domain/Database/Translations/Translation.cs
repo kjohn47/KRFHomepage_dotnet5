@@ -1,10 +1,10 @@
-﻿using KRFHomepage.Domain.Database.Common;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace KRFHomepage.Domain.Database.Translations
+﻿namespace KRFHomepage.Domain.Database.Translations
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using KRFHomepage.Domain.Database.Common;
+
     public class Translation
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

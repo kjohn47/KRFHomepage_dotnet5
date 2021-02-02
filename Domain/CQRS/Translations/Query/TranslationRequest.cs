@@ -1,7 +1,6 @@
-﻿using KRFHomepage.Domain.Constants;
-
-namespace KRFHomepage.Domain.CQRS.Translations.Query
+﻿namespace KRFHomepage.Domain.CQRS.Translations.Query
 {
+    using KRFHomepage.Domain.Constants;
     public class TranslationRequest
     {
         public TranslationRequest( string langCode )

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using KRFCommon.Controller;
-using KRFCommon.CQRS.Query;
-using KRFHomepage.Domain.CQRS.Translations.Query;
-using Microsoft.AspNetCore.Mvc;
-
-namespace WebApi.Controllers.Translations
+﻿namespace WebApi.Controllers.Translations
 {
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+
+    using KRFCommon.Controller;
+    using KRFCommon.CQRS.Query;
+
+    using KRFHomepage.Domain.CQRS.Translations.Query;
+
+
     [ApiController]
     [Route("Translations/")]
     public class TranslationsController : KRFController

@@ -1,10 +1,12 @@
-using KRFHomepage.App.Constants;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using System.Net;
-
 namespace KRFHomepage.WebApi
 {
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Hosting;
+    using System.Net;
+
+    using KRFHomepage.App.Constants;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -18,8 +20,8 @@ namespace KRFHomepage.WebApi
                 {
                     webBuilder.UseKestrel((c, o) =>
                     {
-                        int httpPort = int.Parse(c.Configuration[AppConstants.KestrelConfigurationHttpPort] ?? "4747");
-                        int httpsPort = int.Parse(c.Configuration[AppConstants.KestrelConfigurationHttpsPort] ?? "14747");
+                        int httpPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpPort, 5051);
+                        int httpsPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpsPort, 15051);
                         if (c.HostingEnvironment.IsDevelopment())
                         {
                             o.ListenLocalhost(httpsPort, l => l.UseHttps( h => {
