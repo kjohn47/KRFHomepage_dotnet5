@@ -15,7 +15,7 @@
         public static void InjectQuery( IServiceCollection services )
         {
             services.AddTransient<IQuery<HomePageInput, HomePageOutput>, GetHomePageData>();
-            services.AddTransient<IQuery<TranslationRequest, Dictionary<string, Dictionary<string, string>>>, GetAppTranslations>();
+            services.AddTransient<IQuery<TranslationRequest, TranslationResponse>, GetAppTranslations>();
         }
     }
 }
