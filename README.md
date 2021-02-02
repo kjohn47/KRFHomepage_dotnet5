@@ -7,17 +7,17 @@ Access Token
 
 Config DB (important)
 	LocalDB database
-		Add correct connection string for localdb -> [DIR TO PROJECT]\KRFHomepage\KRFHomepage.Infrastructure\Database\DBFiles\homeDB.mdf
+		Add correct connection string for localdb -> [DIR TO PROJECT]\DBFiles\homeDB.mdf
 		Set the assembly where project migrations are : MigrationAssembly
 
-	Migrations --> Add-Migration [migration_name] -OutputDir "Database/Migrations" -Project KRFHomepage.Infrastructure
+	Migrations --> Add-Migration [migration_name] -OutputDir "KRFHomepage.Infrastructure/Migrations" -Project KRFHomepage.Infrastructure
 	run update-database or run the project (auto migrations enabled)
 
 	Alternative migrations (not tested)
 			dotnet tool install --global dotnet-ef
 			go to infrastructure project [KRFHomepage.Infrastructure]
 			run:
-			dotnet ef  migrations add [migration_name] --context Database.DBContext.[ContextMain] -o KRFHomepage.Infrastructure/Database/Migrations	
+			dotnet ef  migrations add [migration_name] --context Database.DBContext.[ContextMain] -o KRFHomepage.Infrastructure/Migrations	
 Logging
 	logs are fully enabled for dev env and warning only for prd
 	logs appear on console
