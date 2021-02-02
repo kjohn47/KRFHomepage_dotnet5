@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace KRFHomepage.Domain.Database.Translations
+﻿namespace KRFHomepage.Domain.Database.Translations
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Token
     {
         [Key]

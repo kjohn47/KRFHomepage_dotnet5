@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using KRFHomepage.Domain.Database.Homepage;
-using KRFHomepage.Domain.Database.Translations;
-
-namespace KRFHomepage.Domain.Database.Common
+﻿namespace KRFHomepage.Domain.Database.Common
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using KRFHomepage.Domain.Database.Homepage;
+    using KRFHomepage.Domain.Database.Translations;
     public class Language
     {
         [Key]

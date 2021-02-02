@@ -1,7 +1,7 @@
-﻿using KRFHomepage.Domain.Constants;
-
-namespace KRFHomepage.Domain.CQRS.Homepage.Query
+﻿namespace KRFHomepage.Domain.CQRS.Homepage.Query
 {
+    using KRFHomepage.Domain.Constants;
+
     public class HomePageInput
     {
         public HomePageInput(string langCode)

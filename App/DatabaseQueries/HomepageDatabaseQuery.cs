@@ -1,12 +1,12 @@
-﻿using KRFHomepage.Domain.Database.Homepage;
-using KRFHomepage.Infrastructure.Database.DBContext;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace KRFHomepage.App.DatabaseHelper
+﻿namespace KRFHomepage.App.DatabaseQueries
 {
-    public class HomepageDatabaseQuery
+    using System.Threading.Tasks; 
+    using Microsoft.EntityFrameworkCore;
+    
+    using KRFHomepage.Domain.Database.Homepage;
+    using KRFHomepage.Infrastructure.Database.Context;
+
+    public class HomepageDatabaseQuery : IHomepageDatabaseQuery
     {
         private readonly HomepageDBContext _homepageDBContext;
         public HomepageDatabaseQuery(HomepageDBContext homepageDBContext)

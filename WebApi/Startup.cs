@@ -1,25 +1,27 @@
-using KRFCommon.Context;
-using KRFCommon.Handler;
-using KRFCommon.Swagger;
-using KRFHomepage.App.Constants;
-using KRFHomepage.App.Injection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
 namespace KRFHomepage.WebApi
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+
+    using KRFCommon.Context;
+    using KRFCommon.Handler;
+    using KRFCommon.Swagger;
+
+    using KRFHomepage.App.Constants;
+    using KRFHomepage.App.Injection;
+
     public class Startup
-    {       
+    {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.Configuration = configuration;
-            this._apiName = configuration[AppConstants.AppName_Key]?? string.Empty;
-            this._tokenIdentifier = configuration[AppConstants.TokenIdentifier_Key]?? string.Empty;
-            this._tokenKey = configuration[AppConstants.TokenKey_Key]?? string.Empty;
+            this._apiName = configuration.GetValue(AppConstants.AppName_Key, string.Empty);
+            this._tokenIdentifier = configuration.GetValue(AppConstants.TokenIdentifier_Key, string.Empty);
+            this._tokenKey = configuration.GetValue(AppConstants.TokenKey_Key, string.Empty);
             this.HostingEnvironment = env;
         }
 
@@ -51,9 +53,14 @@ namespace KRFHomepage.WebApi
 
             SwaggerInit.ServiceInit(services, this._apiName, this._tokenIdentifier);
 
+            //Database settings
             var connStr = this.Configuration.GetConnectionString(AppConstants.DefaultConStr);
-            var migAssemb = this.Configuration[AppConstants.MigrationAssembly] ?? string.Empty;
-            AppDBContextInjection.InjectDBContext(services, connStr, migAssemb);
+            var localDb = this.Configuration.GetValue(AppConstants.UseLocalDB, false);
+            var migAssemb = this.Configuration.GetValue(AppConstants.MigrationAssembly, string.Empty);
+            var apiDbFolder = this.Configuration.GetValue(AppConstants.ApiDBFolder, string.Empty);
+
+            //Dependency injection
+            AppDBContextInjection.InjectDBContext(services, connStr, migAssemb, localDb, apiDbFolder);
             AppQueryInjection.InjectQuery(services);
             AppCommandInjection.InjectCommand(services);
             AppProxyInjection.InjectProxy(services);
@@ -62,19 +69,20 @@ namespace KRFHomepage.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            bool enableLogs = bool.Parse(this.Configuration[AppConstants.LogsOnPrd] ?? "false");
-            bool reqCtxEnableRead = bool.Parse(this.Configuration[AppConstants.ReqCtxEnableRead] ?? "false");
-            bool reqCtxMemBufferOnly = bool.Parse(this.Configuration[AppConstants.ReqCtxMemBufferOnly] ?? "false");
-            int reqCtxBufferSize = int.Parse(this.Configuration[AppConstants.ReqCtxBufferSize] ?? "30000");
+            //server config settings
+            bool enableLogs = this.Configuration.GetValue(AppConstants.LogsOnPrd, false);
+            bool reqCtxEnableRead = this.Configuration.GetValue(AppConstants.ReqCtxEnableRead, false);
+            bool reqCtxMemBufferOnly = this.Configuration.GetValue(AppConstants.ReqCtxMemBufferOnly, false);
+            int reqCtxBufferSize = this.Configuration.GetValue(AppConstants.ReqCtxBufferSize, 30000);
 
             if (this.HostingEnvironment.IsDevelopment())
-            {                
+            {
                 app.UseDeveloperExceptionPage();
                 enableLogs = true;
-            }                                     
+            }
 
             if (enableLogs && reqCtxEnableRead)
-            {                
+            {
                 app.UseMiddleware<KRFBodyRewindMiddleware>(reqCtxBufferSize, reqCtxMemBufferOnly);
             }
 

@@ -1,78 +1,15 @@
-﻿using KRFHomepage.Domain.Database.Translations;
-using Microsoft.EntityFrameworkCore;
-
-namespace KRFHomepage.Infrastructure.Database.DBContext
+﻿namespace KRFHomepage.Infrastructure.Database.DataSeed
 {
-    public partial class HomepageDBContext
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using KRFHomepage.Domain.Database.Translations;
+
+    public static class TranslationSeeder
     {
-        public DbSet<Token> Tokens { get; set; }
-        public DbSet<TranslationCategory> Categories { get; set; }
-        public DbSet<Translation> Translations { get; set; }
-
-        protected void TranslationModelCreating(ModelBuilder modelBuilder)
+        public static void Seed(EntityTypeBuilder<Translation> entity)
         {
-            //// Database Tables Configure ////
-            modelBuilder.Entity<TranslationCategory>(c =>
-            {
-                c.ToTable("categories");
-                c.HasMany(c => c.Translations).WithOne(c => c.TranslationCategory);
-            });
-
-            modelBuilder.Entity<Token>(t =>
-            {
-                t.ToTable("tokens");
-                t.HasMany(c => c.Translations).WithOne(c => c.Token);
-            });
-
-            modelBuilder.Entity<Translation>( t =>
-            {
-                t.ToTable("translations");
-                t.Property(t => t.LanguageCode).IsRequired();
-                t.Property(t => t.TranslationCategoryValue).IsRequired();
-                t.Property(t => t.TokenValue).IsRequired();
-                t.Property(t => t.Text).IsRequired();
-                t.HasOne(t => t.Language).WithMany( c => c.Translations );
-                t.HasOne(t => t.Token).WithMany(c => c.Translations);
-                t.HasOne(t => t.TranslationCategory).WithMany(c => c.Translations);                
-            });            
-
-            //// Data Seeding ////            
-            modelBuilder.Entity<TranslationCategory>().HasData( new[] {
-                new TranslationCategory { Value = "_generic" },
-                new TranslationCategory { Value = "_tableText" },
-                new TranslationCategory { Value = "_TestPage" },
-                new TranslationCategory { Value = "_datePicker" }
-            });
-            modelBuilder.Entity<Token>().HasData( new[] {
-                new Token { Value = "#(loadingText)" },
-                new Token { Value = "#(goBackToHome)" },
-                new Token { Value = "#(goBackToHomeToolTip)" },
-                new Token { Value = "#(cardDetails)" },
-                new Token { Value = "#(edit)" },
-                new Token { Value = "#(remove)" },
-                new Token { Value = "#(TestPage Title)" },
-                new Token { Value = "#(January)" },
-                new Token { Value = "#(February)" },
-                new Token { Value = "#(March)" },
-                new Token { Value = "#(April)" },
-                new Token { Value = "#(May)" },
-                new Token { Value = "#(June)" },
-                new Token { Value = "#(July)" },
-                new Token { Value = "#(August)" },
-                new Token { Value = "#(September)" },
-                new Token { Value = "#(October)" },
-                new Token { Value = "#(November)" },
-                new Token { Value = "#(December)" },
-                new Token { Value = "#(Mon)" },
-                new Token { Value = "#(Tue)" },
-                new Token { Value = "#(Wed)" },
-                new Token { Value = "#(Thu)" },
-                new Token { Value = "#(Fri)" },
-                new Token { Value = "#(Sat)" },
-                new Token { Value = "#(Sun)" }
-            });            
-            modelBuilder.Entity<Translation>().HasData( new[] {
-                new Translation {                    
+            entity.HasData(new[] {
+                new Translation {
                     ID = 1,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_generic",
@@ -489,6 +426,5 @@ namespace KRFHomepage.Infrastructure.Database.DBContext
                 }
             });
         }
-
     }
 }
