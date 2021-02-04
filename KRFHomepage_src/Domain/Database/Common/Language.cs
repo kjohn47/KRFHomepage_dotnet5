@@ -12,6 +12,7 @@
         public string Name { get; set; }
 
         public virtual HomePageData HomePageData { get; set; }
-        public virtual ICollection<Translation> Translations { get; set; }        
+        public virtual ICollection<Translation> Translations { get; set; }
+        public virtual ICollection<ErrorTranslation> ErrorTranslations { get; set; }
     }
 }

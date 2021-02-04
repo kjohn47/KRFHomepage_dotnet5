@@ -13,6 +13,7 @@
             entity.Property(x => x.Name).HasMaxLength(30).IsRequired();
             entity.HasMany(l => l.Translations).WithOne(c => c.Language);
             entity.HasOne(h => h.HomePageData).WithOne(c => c.Language);
+            entity.HasMany(e => e.ErrorTranslations).WithOne(c => c.Language);
         }
     }
 }

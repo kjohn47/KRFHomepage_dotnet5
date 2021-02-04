@@ -20,6 +20,8 @@
         public DbSet<Token> Tokens { get; set; }
         public DbSet<TranslationCategory> Categories { get; set; }
         public DbSet<Translation> Translations { get; set; }
+        public DbSet<ErrorCode> ErrorCodes { get; set; }
+        public DbSet<ErrorTranslation> ErrorTranslations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -55,6 +57,18 @@
             {
                 TranslationConfiguration.Configure(t);
                 TranslationSeeder.Seed(t);
+            });
+
+            modelBuilder.Entity<ErrorCode>(e =>
+            {
+                ErrorCodeConfiguration.Configure(e);
+                //ErrorCodeSeeder.Seed(e);
+            });
+
+            modelBuilder.Entity<ErrorTranslation>(e =>
+            {
+                ErrorTranslationConfiguration.Configure(e);
+                //ErrorTranslationSeeder.Seed(e);
             });
         }
     }
