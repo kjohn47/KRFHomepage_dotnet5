@@ -31,8 +31,8 @@
         {
             modelBuilder.Entity<Language>(l =>
             {
-                CommonConfiguration.Configure(l);
-                CommonSeeder.Seed(l);
+                LanguageConfiguration.Configure(l);
+                LanguageSeeder.Seed(l);
             });
 
             modelBuilder.Entity<HomePageData>(h =>
@@ -62,13 +62,13 @@
             modelBuilder.Entity<ErrorCode>(e =>
             {
                 ErrorCodeConfiguration.Configure(e);
-                //ErrorCodeSeeder.Seed(e);
+                ErrorCodeSeeder.Seed(e);
             });
 
             modelBuilder.Entity<ErrorTranslation>(e =>
             {
                 ErrorTranslationConfiguration.Configure(e);
-                //ErrorTranslationSeeder.Seed(e);
+                ErrorTranslationSeeder.Seed(e);
             });
         }
     }

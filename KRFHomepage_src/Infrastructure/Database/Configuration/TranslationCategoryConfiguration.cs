@@ -10,6 +10,9 @@
         public static void Configure(EntityTypeBuilder<TranslationCategory> entity)
         {
             entity.ToTable("categories");
+            entity.HasKey(c => c.Value).HasName("PK_CATEGORIES");
+            entity.Property(c => c.Value).HasMaxLength(100).IsRequired();
+
             entity.HasMany(c => c.Translations).WithOne(c => c.TranslationCategory);
         }
     }
