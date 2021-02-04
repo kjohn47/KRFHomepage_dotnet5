@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="CQRS\Homepage\Command\" />
+    <Folder Include="CQRS\Homepage\Model\" />
     <Folder Include="CQRS\Translations\Command\" />
   </ItemGroup>
 
