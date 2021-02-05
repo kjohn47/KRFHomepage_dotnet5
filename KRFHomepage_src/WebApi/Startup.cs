@@ -10,11 +10,11 @@ namespace KRFHomepage.WebApi
     using KRFCommon.Context;
     using KRFCommon.Handler;
     using KRFCommon.Swagger;
-
-    using KRFHomepage.App.Injection;
     using KRFCommon.Constants;
     using KRFCommon.Api;
     using KRFCommon.Database;
+
+    using KRFHomepage.App.Injection;
 
     public class Startup
     {
