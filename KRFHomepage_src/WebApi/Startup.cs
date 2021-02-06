@@ -105,10 +105,7 @@ namespace KRFHomepage.WebApi
 
             SwaggerInit.Configure(app, this._apiSettings.ApiName);
 
-            if (this._databases != null && this._databases.EnableAutomaticMigration)
-            {
-                AppDBContextInjection.ConfigureDBContext(app);
-            }
+            AppDBContextInjection.ConfigureDBContext(app, this._databases);
         }
     }
 }

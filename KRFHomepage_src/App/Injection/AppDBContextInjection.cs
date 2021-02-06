@@ -16,17 +16,20 @@
             if (databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any())
             {
                 KRFDbContextInjectHelper.InjectDBContext<HomepageDBContext>(services, databaseSettings.Databases.ElementAt(0), databaseSettings.MigrationAssembly);
-            }
 
-            services.AddScoped( s => new Lazy<IHomepageDatabaseQuery>(() => new HomepageDatabaseQuery(s.GetService<HomepageDBContext>())));
-            services.AddScoped( s => new Lazy<ITranslationsDatabaseQuery>(() => new TranslationsDatabaseQuery(s.GetService<HomepageDBContext>())));
+                services.AddScoped(s => new Lazy<IHomepageDatabaseQuery>(() => new HomepageDatabaseQuery(s.GetService<HomepageDBContext>())));
+                services.AddScoped(s => new Lazy<ITranslationsDatabaseQuery>(() => new TranslationsDatabaseQuery(s.GetService<HomepageDBContext>())));
+            }
         }
 
-        public static void ConfigureDBContext( IApplicationBuilder app )
+        public static void ConfigureDBContext( IApplicationBuilder app, KRFDatabases databaseSettings = null)
         {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            if (databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null)
             {
-                KRFDbContextInjectHelper.ConfigureAutomaticMigrations<HomepageDBContext>(serviceScope);
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    KRFDbContextInjectHelper.ConfigureAutomaticMigrations<HomepageDBContext>(serviceScope);
+                }
             }
         }
     }
