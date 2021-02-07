@@ -11,7 +11,7 @@
 
     public static class AppQueryInjection
     {
-        public static void InjectQuery( this IServiceCollection services )
+        public static void InjectAppQueries( this IServiceCollection services )
         {
             services.AddTransient<IQuery<HomePageInput, HomePageOutput>, GetHomePageData>();
             services.AddTransient<IQuery<TranslationRequest, TranslationResponse>, GetAppTranslations>();

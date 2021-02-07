@@ -59,10 +59,10 @@ namespace KRFHomepage.WebApi
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
 
             //Dependency injection
-            services.InjectDBContext( this._databases );
-            services.InjectQuery();
-            services.InjectCommand();
-            services.InjectProxy();
+            services.InjectAppDBContext( this._databases );
+            services.InjectAppQueries();
+            services.InjectAppCommands();
+            services.InjectAppProxies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,7 +105,7 @@ namespace KRFHomepage.WebApi
 
             app.SwaggerConfigure( this._apiSettings.ApiName );
 
-            app.ConfigureDBContext( this._databases );
+            app.ConfigureAppDBContext( this._databases );
         }
     }
 }

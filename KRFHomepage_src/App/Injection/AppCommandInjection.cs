@@ -3,7 +3,7 @@
     using Microsoft.Extensions.DependencyInjection;
     public static class AppCommandInjection
     {
-        public static void InjectCommand(this IServiceCollection services)
+        public static void InjectAppCommands( this IServiceCollection services)
         {
         }
     }

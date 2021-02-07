@@ -11,7 +11,7 @@
 
     public static class AppDBContextInjection
     {
-        public static void InjectDBContext( this IServiceCollection services, KRFDatabases databaseSettings = null )
+        public static void InjectAppDBContext( this IServiceCollection services, KRFDatabases databaseSettings = null )
         {
             if ( databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any() )
             {
@@ -22,7 +22,7 @@
             }
         }
 
-        public static void ConfigureDBContext( this IApplicationBuilder app, KRFDatabases databaseSettings = null )
+        public static void ConfigureAppDBContext( this IApplicationBuilder app, KRFDatabases databaseSettings = null )
         {
             if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null )
             {
