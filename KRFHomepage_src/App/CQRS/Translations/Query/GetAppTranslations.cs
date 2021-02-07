@@ -34,6 +34,20 @@
             IEnumerable<string> languageCodes = null;
             Dictionary<string, Dictionary<string, string>> response = null;
 
+            if ( !this._memoryCache.TryGetValue( AppConstants.MemoryCacheTranslationLanguageCodeKey, out languageCodes ) )
+            {
+                languageCodes = await this._translationQuery.GetLanguageCodesAsync();
+                this._memoryCache.Set(
+                    AppConstants.MemoryCacheTranslationLanguageCodeKey,
+                    languageCodes,
+                    new DateTimeOffset( DateTime.Now.AddMinutes( ( double ) this._memoryCacheSettings.TranslationsCacheDuration ) ) );
+            }
+
+            if ( !languageCodes.Contains( request.LangCode ) )
+            {
+                return ResponseOut<TranslationResponse>.GenerateFault( new ErrorOut( System.Net.HttpStatusCode.NotFound, "Language code does not exist on sytem" ) );
+            }
+
             if ( !this._memoryCache.TryGetValue( translationCacheKey, out response ) )
             {
                 var translatedText = await this._translationQuery.GetTranslationDataAsync( request.LangCode );
@@ -55,22 +69,10 @@
                     new DateTimeOffset( DateTime.Now.AddMinutes( ( double ) this._memoryCacheSettings.TranslationsCacheDuration ) ) );
             }
 
-            if ( request.GetKeys )
-            {
-                if ( !this._memoryCache.TryGetValue( AppConstants.MemoryCacheTranslationLanguageCodeKey, out languageCodes ) )
-                {
-                    languageCodes = await this._translationQuery.GetLanguageCodesAsync();
-                    this._memoryCache.Set(
-                        AppConstants.MemoryCacheTranslationLanguageCodeKey,
-                        languageCodes,
-                        new DateTimeOffset( DateTime.Now.AddMinutes( ( double ) this._memoryCacheSettings.TranslationsCacheDuration ) ) );
-                }
-            }
-
             return ResponseOut<TranslationResponse>.GenerateResult( new TranslationResponse
             {
                 Translation = response,
-                LanguageCodes = languageCodes
+                LanguageCodes = request.GetKeys ? languageCodes : null
             } );
         }
     }
