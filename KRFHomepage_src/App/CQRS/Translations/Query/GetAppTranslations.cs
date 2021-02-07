@@ -45,7 +45,7 @@
 
             if ( !languageCodes.Contains( request.LangCode ) )
             {
-                return ResponseOut<TranslationResponse>.GenerateFault( new ErrorOut( System.Net.HttpStatusCode.NotFound, "Language code does not exist on sytem" ) );
+                return ResponseOut<TranslationResponse>.GenerateFault( new ErrorOut( System.Net.HttpStatusCode.NotFound, "Language code does not exist on sytem", ResponseErrorType.Validation ) );
             }
 
             if ( !this._memoryCache.TryGetValue( translationCacheKey, out response ) )
