@@ -1,6 +1,5 @@
 ﻿namespace KRFHomepage.App.Injection
 {
-    using System.Collections.Generic;
     using Microsoft.Extensions.DependencyInjection;
 
     using KRFCommon.CQRS.Query;
@@ -11,8 +10,8 @@
     using KRFHomepage.Domain.CQRS.Translations.Query;
 
     public static class AppQueryInjection
-    {      
-        public static void InjectQuery( IServiceCollection services )
+    {
+        public static void InjectQuery( this IServiceCollection services )
         {
             services.AddTransient<IQuery<HomePageInput, HomePageOutput>, GetHomePageData>();
             services.AddTransient<IQuery<TranslationRequest, TranslationResponse>, GetAppTranslations>();

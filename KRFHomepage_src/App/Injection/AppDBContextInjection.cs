@@ -11,24 +11,24 @@
 
     public static class AppDBContextInjection
     {
-        public static void InjectDBContext(IServiceCollection services, KRFDatabases databaseSettings = null)
+        public static void InjectDBContext( this IServiceCollection services, KRFDatabases databaseSettings = null )
         {
-            if (databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any())
+            if ( databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any() )
             {
-                KRFDbContextInjectHelper.InjectDBContext<HomepageDBContext>(services, databaseSettings.Databases.ElementAt(0), databaseSettings.MigrationAssembly);
+                services.InjectDBContext<HomepageDBContext>( databaseSettings.Databases.ElementAt( 0 ), databaseSettings.MigrationAssembly );
 
-                services.AddScoped(s => new Lazy<IHomepageDatabaseQuery>(() => new HomepageDatabaseQuery(s.GetService<HomepageDBContext>())));
-                services.AddScoped(s => new Lazy<ITranslationsDatabaseQuery>(() => new TranslationsDatabaseQuery(s.GetService<HomepageDBContext>())));
+                services.AddScoped( s => new Lazy<IHomepageDatabaseQuery>( () => new HomepageDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
+                services.AddScoped( s => new Lazy<ITranslationsDatabaseQuery>( () => new TranslationsDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
             }
         }
 
-        public static void ConfigureDBContext( IApplicationBuilder app, KRFDatabases databaseSettings = null)
+        public static void ConfigureDBContext( this IApplicationBuilder app, KRFDatabases databaseSettings = null )
         {
-            if (databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null)
+            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null )
             {
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                using ( var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope() )
                 {
-                    KRFDbContextInjectHelper.ConfigureAutomaticMigrations<HomepageDBContext>(serviceScope);
+                    serviceScope.ConfigureAutomaticMigrations<HomepageDBContext>();
                 }
             }
         }
