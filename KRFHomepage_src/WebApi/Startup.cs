@@ -15,9 +15,8 @@ namespace KRFHomepage.WebApi
     using KRFCommon.Database;
 
     using KRFHomepage.App.Injection;
-    using System;
     using KRFHomepage.App.Model;
-    using KRFHomepage.App.Constants;
+    using KRFCommon.MemoryCache;
 
     public class Startup
     {
@@ -28,12 +27,7 @@ namespace KRFHomepage.WebApi
             this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
             this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
             this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
-            this._cacheMemorySettings = configuration.GetSection( AppConstants.MemoryCacheSettings_Key ).Get<MemoryCacheSettings>();
-
-            if ( this._cacheMemorySettings == null )
-            {
-                this._cacheMemorySettings = new MemoryCacheSettings( true );
-            }
+            this._cacheMemorySettings = configuration.GetSection( KRFApiSettings.MemoryCacheSettings_Key ).Get<MemoryCacheSettings>() ?? new MemoryCacheSettings();
 
             this.HostingEnvironment = env;
         }
@@ -68,28 +62,7 @@ namespace KRFHomepage.WebApi
 
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
 
-            services.AddMemoryCache( x =>
-             {
-                 x.ExpirationScanFrequency = new TimeSpan(
-                     _cacheMemorySettings.CacheCleanupInterval.Hours,
-                     _cacheMemorySettings.CacheCleanupInterval.Minutes,
-                     _cacheMemorySettings.CacheCleanupInterval.Seconds );
-
-                 if ( _cacheMemorySettings.MemoryCacheSize != null )
-                 {
-                     if ( _cacheMemorySettings.MemoryCacheSize.MaxSize.HasValue )
-                     {
-                         x.SizeLimit = _cacheMemorySettings.MemoryCacheSize.MaxSize.Value;
-                     }
-
-                     if ( _cacheMemorySettings.MemoryCacheSize.CompactionPercentage.HasValue )
-                     {
-                         x.SizeLimit = _cacheMemorySettings.MemoryCacheSize.CompactionPercentage.Value;
-                     }
-                 }
-             } );
-            services.AddSingleton( this._cacheMemorySettings );
-
+            services.InjectMemoryCache( this._cacheMemorySettings );
 
             //Dependency injection
             services.InjectAppDBContext( this._databases );

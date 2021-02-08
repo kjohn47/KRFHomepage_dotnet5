@@ -1,74 +1,30 @@
 ﻿namespace KRFHomepage.App.Model
 {
-    public class MemoryCacheSettings
+    using KRFCommon.MemoryCache;
+    public class MemoryCacheSettings : MemoryCacheSettingsBase
     {
-        private const int _defaultTranslationDuration = 120;
-        private const int _defaultCleanupInterval = 10;
+        private const int DefaultTranslationDuration = 120;
 
-        public MemoryCacheSettings()
-        { }
+        private int? _translationsCacheDuration;
 
-        public MemoryCacheSettings( bool initializeDefaults = false )
-        {
-            if ( initializeDefaults )
-            {
-                this._cacheCleanupInterval = new MemoryCacheCleanup
-                {
-                    Minutes = _defaultCleanupInterval
-                };
-
-                this._translationsCacheDuration = _defaultTranslationDuration;
-            }
-        }
-
-        private MemoryCacheCleanup _cacheCleanupInterval;
-        private int _translationsCacheDuration;
-
-
-        public MemoryCacheSize MemoryCacheSize { get; set; }
-
-        public MemoryCacheCleanup CacheCleanupInterval
+        public int TranslationsCacheDuration
         {
             get
             {
-                return this._cacheCleanupInterval;
+                if ( this._translationsCacheDuration.HasValue )
+                {
+                    return this._translationsCacheDuration.Value;
+                }
+
+                this._translationsCacheDuration = DefaultTranslationDuration;
+                return this._translationsCacheDuration.Value;
             }
 
             set
             {
-                if ( value != null )
-                {
-                    this._cacheCleanupInterval = value;
-                }
-                else
-                {
-                    this._cacheCleanupInterval = new MemoryCacheCleanup
-                    {
-                        Minutes = _defaultCleanupInterval
-                    };
-                }
-            }
-        }
-
-
-        public int? TranslationsCacheDuration
-        {
-            get
-            {
-                return this._translationsCacheDuration;
+                this._translationsCacheDuration = value;
             }
 
-            set
-            {
-                if ( value.HasValue )
-                {
-                    this._translationsCacheDuration = value.Value;
-                }
-                else
-                {
-                    this._translationsCacheDuration = _defaultTranslationDuration;
-                }
-            }
         }
     }
 }
