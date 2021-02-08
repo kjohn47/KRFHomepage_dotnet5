@@ -1,11 +1,13 @@
 namespace KRFHomepage.WebApi
 {
+    using System.Net;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Hosting;
-    using System.Net;
+    using Microsoft.AspNetCore.Server.Kestrel.Https;
 
-    using KRFHomepage.App.Constants;
+    using KRFCommon.Api;
+    using KRFCommon.Constants;
 
     public class Program
     {
@@ -20,13 +22,15 @@ namespace KRFHomepage.WebApi
                 {
                     webBuilder.UseKestrel((c, o) =>
                     {
-                        int httpPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpPort, 5051);
-                        int httpsPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpsPort, 15051);
+                        var kestrelSettings = c.Configuration.GetSection(KRFApiSettings.KestrelConfiguration_Key).Get<KestrelConfiguration>();
+                        int httpPort = kestrelSettings.HttpPort == 0 ? 5051 : kestrelSettings.HttpPort;
+                        int httpsPort = kestrelSettings.HttpsPort == 0 ? 15051 : kestrelSettings.HttpsPort;
+
                         if (c.HostingEnvironment.IsDevelopment())
                         {
                             o.ListenLocalhost(httpsPort, l => l.UseHttps( h => {
                                 h.AllowAnyClientCertificate();
-                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                                h.ClientCertificateMode = ClientCertificateMode.NoCertificate;
                             }));
                             o.ListenLocalhost(httpPort);
                         }
@@ -34,7 +38,7 @@ namespace KRFHomepage.WebApi
                         {
                             o.Listen(IPAddress.Any, httpsPort, l => l.UseHttps(h => {
                                 h.AllowAnyClientCertificate();
-                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                                h.ClientCertificateMode = ClientCertificateMode.NoCertificate;
                             }));
                             o.Listen(IPAddress.Any, httpPort);
                         }
