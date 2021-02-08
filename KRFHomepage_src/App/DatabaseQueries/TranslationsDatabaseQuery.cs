@@ -11,45 +11,79 @@
     using KRFHomepage.Domain.Database.Common;
     using KRFHomepage.Domain.Database.Translations;
     using KRFHomepage.Infrastructure.Database.Context;
+    using KRFHomepage.Domain.CQRS.Translations.Model;
 
     public class TranslationsDatabaseQuery : ITranslationsDatabaseQuery
     {
         private readonly HomepageDBContext _homepageDBContext;
-        public TranslationsDatabaseQuery(HomepageDBContext homepageDBContext)
+        public TranslationsDatabaseQuery( HomepageDBContext homepageDBContext )
         {
             this._homepageDBContext = homepageDBContext;
         }
 
-        public async Task<List<TranslationCategory>> GetTranslationDataAsync( string langCode )
+        public async Task<Dictionary<string, Dictionary<string, string>>> GetTranslationDataAsync( string langCode )
         {
-            return await this._homepageDBContext.Categories
-                .Include(x => x.Translations)
-                .Select(x => new TranslationCategory
+            var query = await this._homepageDBContext.Categories
+                .Include( x => x.Translations )
+                .Select( x => new
                 {
-                    Value = x.Value,
+                    Category = x.Value,
                     Translations = x.Translations
-                       .Where(z => z.LanguageCode.Equals(langCode))
-                       .ToList()
-                })
+                        .Where( z => z.LanguageCode.Equals( langCode ) )
+                        .Select( t => new
+                        {
+                            t.TokenValue,
+                            t.Text
+                        } )
+                } )
                 .AsNoTracking()
                 .ToListAsync();
+
+            return query.Select( x => new KeyValuePair<string, Dictionary<string, string>>(
+                    x.Category,
+                    x.Translations.Select( t => new KeyValuePair<string, string>
+                         (
+                             t.TokenValue,
+                             t.Text
+                         ) )
+                        .ToDictionary( y => y.Key, y => y.Value )
+                    ) )
+                    .ToDictionary( z => z.Key, z => z.Value );
         }
 
         public async Task<IEnumerable<string>> GetLanguageCodesAsync()
         {
             return await this._homepageDBContext.Languages
                 .AsNoTracking()
-                .Select(x => x.Code)
+                .Select( x => x.Code )
                 .ToListAsync();
+        }
+
+        public async Task<Dictionary<string, ErrorTranslationItem>> GetErrorTranslations( string langCode )
+        {
+            var query = await this._homepageDBContext.ErrorTranslations
+                .AsNoTracking()
+                .Where( x => x.LanguageCode.Equals( langCode ) )
+                .Select( e => new { e.Code, e.Title, e.Message } )
+                .ToListAsync();
+
+            return query.Select( e => new KeyValuePair<string, ErrorTranslationItem>(
+                    e.Code,
+                    new ErrorTranslationItem
+                    {
+                        Title = e.Title,
+                        Message = e.Message
+                    }
+                ) ).ToDictionary( z => z.Key, z => z.Value );
         }
 
         public async Task<IQueryCommand> AddNewLanguageAsync( string langCode, string langDescription )
         {
-            if (!string.IsNullOrEmpty(langCode) && !string.IsNullOrEmpty(langDescription) && langCode.Length == 2)
-            {               
+            if ( !string.IsNullOrEmpty( langCode ) && !string.IsNullOrEmpty( langDescription ) && langCode.Length == 2 )
+            {
                 try
                 {
-                    if( await this._homepageDBContext.Languages.AnyAsync( x => x.Code.Equals( langCode ) ) )
+                    if ( await this._homepageDBContext.Languages.AnyAsync( x => x.Code.Equals( langCode ) ) )
                     {
                         return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Language code already exists" };
                     }
@@ -60,10 +94,10 @@
                         Name = langDescription
                     };
 
-                    await this._homepageDBContext.Languages.AddAsync(newLang);
+                    await this._homepageDBContext.Languages.AddAsync( newLang );
                     await this._homepageDBContext.SaveChangesAsync();
                 }
-                catch( Exception ex )
+                catch ( Exception ex )
                 {
                     return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
@@ -76,13 +110,13 @@
             }
         }
 
-        public async Task<IQueryCommand> AddNewCategoryAsync(string categoryName)
+        public async Task<IQueryCommand> AddNewCategoryAsync( string categoryName )
         {
-            if (!string.IsNullOrEmpty(categoryName))
-            {               
+            if ( !string.IsNullOrEmpty( categoryName ) )
+            {
                 try
                 {
-                    if (await this._homepageDBContext.Categories.AnyAsync(x => x.Value.Equals(categoryName)))
+                    if ( await this._homepageDBContext.Categories.AnyAsync( x => x.Value.Equals( categoryName ) ) )
                     {
                         return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Category already exists" };
                     }
@@ -92,10 +126,10 @@
                         Value = categoryName
                     };
 
-                    await this._homepageDBContext.Categories.AddAsync(newCategory);
+                    await this._homepageDBContext.Categories.AddAsync( newCategory );
                     await this._homepageDBContext.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
@@ -108,13 +142,13 @@
             }
         }
 
-        public async Task<IQueryCommand> AddNewTokenAsync(string token)
+        public async Task<IQueryCommand> AddNewTokenAsync( string token )
         {
-            if (!string.IsNullOrEmpty(token))
+            if ( !string.IsNullOrEmpty( token ) )
             {
                 try
                 {
-                    if (await this._homepageDBContext.Tokens.AnyAsync(x => x.Value.Equals(token)))
+                    if ( await this._homepageDBContext.Tokens.AnyAsync( x => x.Value.Equals( token ) ) )
                     {
                         return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Token already exists" };
                     }
@@ -124,10 +158,10 @@
                         Value = token
                     };
 
-                    await this._homepageDBContext.Tokens.AddAsync(newToken);
+                    await this._homepageDBContext.Tokens.AddAsync( newToken );
                     await this._homepageDBContext.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
@@ -140,13 +174,13 @@
             }
         }
 
-        public async Task<IQueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation)
+        public async Task<IQueryCommand> AddNewTranslationAsync( string langCode, string category, string token, string translation )
         {
-            if (!string.IsNullOrEmpty(langCode) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(translation))
+            if ( !string.IsNullOrEmpty( langCode ) && !string.IsNullOrEmpty( category ) && !string.IsNullOrEmpty( token ) && !string.IsNullOrEmpty( translation ) )
             {
                 try
                 {
-                    if (await this._homepageDBContext.Translations.AnyAsync(x => x.LanguageCode.Equals(langCode) && x.TokenValue.Equals(token) && x.TranslationCategoryValue.Equals(category)))
+                    if ( await this._homepageDBContext.Translations.AnyAsync( x => x.LanguageCode.Equals( langCode ) && x.TokenValue.Equals( token ) && x.TranslationCategoryValue.Equals( category ) ) )
                     {
                         return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Translation already exists" };
                     }
@@ -159,10 +193,10 @@
                         Text = translation
                     };
 
-                    await this._homepageDBContext.Translations.AddAsync(newTranslation);
+                    await this._homepageDBContext.Translations.AddAsync( newTranslation );
                     await this._homepageDBContext.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = ex.Message };
                 }
