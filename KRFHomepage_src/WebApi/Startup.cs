@@ -10,105 +10,108 @@ namespace KRFHomepage.WebApi
     using KRFCommon.Context;
     using KRFCommon.Handler;
     using KRFCommon.Swagger;
+    using KRFCommon.Constants;
+    using KRFCommon.Api;
+    using KRFCommon.Database;
 
-    using KRFHomepage.App.Constants;
     using KRFHomepage.App.Injection;
+    using KRFHomepage.App.Model;
+    using KRFCommon.MemoryCache;
 
     public class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup( IConfiguration configuration, IWebHostEnvironment env )
         {
             this.Configuration = configuration;
-            this._apiName = configuration.GetValue(AppConstants.AppName_Key, string.Empty);
-            this._tokenIdentifier = configuration.GetValue(AppConstants.TokenIdentifier_Key, string.Empty);
-            this._tokenKey = configuration.GetValue(AppConstants.TokenKey_Key, string.Empty);
+            this._apiSettings = configuration.GetSection( KRFApiSettings.AppConfiguration_Key ).Get<AppConfiguration>();
+            this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
+            this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
+            this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
+            this._cacheMemorySettings = configuration.GetSection( KRFApiSettings.MemoryCacheSettings_Key ).Get<MemoryCacheSettings>() ?? new MemoryCacheSettings();
+
             this.HostingEnvironment = env;
         }
 
-        private readonly string _apiName;
-        private readonly string _tokenIdentifier;
-        private readonly string _tokenKey;
+        private readonly AppConfiguration _apiSettings;
+        private readonly RequestContext _requestContext;
+        private readonly KRFDatabases _databases;
+        private readonly bool _enableLogs;
+        private readonly MemoryCacheSettings _cacheMemorySettings;
 
         public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices( IServiceCollection services )
         {
             //Add logger config
-            services.AddLogging(l =>
-            {
-                var config = this.Configuration.GetSection(AppConstants.Logging);
-                l.ClearProviders();
-                l.AddConfiguration(config);
-                l.AddConsole();
-                l.AddDebug();
-                l.AddEventLog();
-                l.AddEventSourceLogger();
-            });
+            services.AddLogging( l =>
+             {
+                 var config = this.Configuration.GetSection( KRFApiSettings.Logging_Key );
+                 l.ClearProviders();
+                 l.AddConfiguration( config );
+                 l.AddConsole();
+                 l.AddDebug();
+                 l.AddEventLog();
+                 l.AddEventSourceLogger();
+             } );
 
-            InjectUserContext.InjectContext(services, this._tokenIdentifier, this._tokenKey);
+            services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
 
             services.AddControllers();
 
-            SwaggerInit.ServiceInit(services, this._apiName, this._tokenIdentifier);
+            services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
 
-            //Database settings
-            var connStr = this.Configuration.GetConnectionString(AppConstants.DefaultConStr);
-            var localDb = this.Configuration.GetValue(AppConstants.UseLocalDB, false);
-            var migAssemb = this.Configuration.GetValue(AppConstants.MigrationAssembly, string.Empty);
-            var apiDbFolder = this.Configuration.GetValue(AppConstants.ApiDBFolder, string.Empty);
+            services.InjectMemoryCache( this._cacheMemorySettings );
 
             //Dependency injection
-            AppDBContextInjection.InjectDBContext(services, connStr, migAssemb, localDb, apiDbFolder);
-            AppQueryInjection.InjectQuery(services);
-            AppCommandInjection.InjectCommand(services);
-            AppProxyInjection.InjectProxy(services);
+            services.InjectAppDBContext( this._databases );
+            services.InjectAppQueries();
+            services.InjectAppCommands();
+            services.InjectAppProxies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure( IApplicationBuilder app, ILoggerFactory loggerFactory )
         {
             //server config settings
-            bool enableLogs = this.Configuration.GetValue(AppConstants.LogsOnPrd, false);
-            bool reqCtxEnableRead = this.Configuration.GetValue(AppConstants.ReqCtxEnableRead, false);
-            bool reqCtxMemBufferOnly = this.Configuration.GetValue(AppConstants.ReqCtxMemBufferOnly, false);
-            int reqCtxBufferSize = this.Configuration.GetValue(AppConstants.ReqCtxBufferSize, 30000);
+            var enableLogs = this._enableLogs;
 
-            if (this.HostingEnvironment.IsDevelopment())
+
+            if ( this.HostingEnvironment.IsDevelopment() )
             {
                 app.UseDeveloperExceptionPage();
                 enableLogs = true;
             }
 
-            if (enableLogs && reqCtxEnableRead)
+            if ( enableLogs && this._requestContext.EnableRead )
             {
-                app.UseMiddleware<KRFBodyRewindMiddleware>(reqCtxBufferSize, reqCtxMemBufferOnly);
+                app.UseMiddleware<KRFBodyRewindMiddleware>( this._requestContext.BufferSize, this._requestContext.MemBufferOnly );
             }
 
-            if (reqCtxEnableRead && reqCtxMemBufferOnly)
+            if ( this._requestContext.EnableRead && this._requestContext.MemBufferOnly )
             {
-                KRFExceptionHandlerMiddleware.Configure(app, loggerFactory, enableLogs, this._apiName, this._tokenIdentifier, reqCtxBufferSize);
+                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier, this._requestContext.BufferSize );
             }
             else
             {
-                KRFExceptionHandlerMiddleware.Configure(app, loggerFactory, enableLogs, this._apiName, this._tokenIdentifier);
+                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            AuthConfigure.Configure(app);
+            app.AuthConfigure();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints( endpoints =>
+             {
+                 endpoints.MapControllers();
+             } );
 
-            SwaggerInit.Configure(app, this._apiName);
+            app.SwaggerConfigure( this._apiSettings.ApiName );
 
-            AppDBContextInjection.ConfigureDBContext(app);
+            app.ConfigureAppDBContext( this._databases );
         }
     }
 }

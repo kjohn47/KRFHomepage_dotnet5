@@ -1,12 +1,13 @@
 ﻿namespace KRFHomepage.App.DatabaseQueries
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using KRFCommon.Database;
 
     using KRFHomepage.Domain.Database.Translations;
-    public interface ITranslationsDatabaseQuery
+    public interface ITranslationsDatabaseQuery : IDisposable
     {
         Task<List<TranslationCategory>> GetTranslationDataAsync(string langCode);
 

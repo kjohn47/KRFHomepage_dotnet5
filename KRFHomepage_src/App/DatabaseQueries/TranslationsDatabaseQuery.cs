@@ -174,5 +174,10 @@
                 return new QueryCommand { Result = QueryResultEnum.Error, ResultDescription = "Missing data" };
             }
         }
+
+        public void Dispose()
+        {
+            this._homepageDBContext.Dispose();
+        }
     }
 }

@@ -44,13 +44,21 @@
                 {
                     ID = 5,
                     LanguageCode = "PT",
+                    TranslationCategoryValue = "_generic",
+                    TokenValue = "#(Cancel)",
+                    Text = "Cancelar"
+                },
+                new Translation
+                {
+                    ID = 6,
+                    LanguageCode = "PT",
                     TranslationCategoryValue = "_tableText",
                     TokenValue = "#(edit)",
                     Text = "Editar"
                 },
                 new Translation
                 {
-                    ID = 6,
+                    ID = 7,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_tableText",
                     TokenValue = "#(remove)",
@@ -58,7 +66,7 @@
                 },
                 new Translation
                 {
-                    ID = 7,
+                    ID = 8,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_TestPage",
                     TokenValue = "#(TestPage Title)",
@@ -66,7 +74,7 @@
                 },
                 new Translation
                 {
-                    ID = 8,
+                    ID = 9,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(January)",
@@ -74,7 +82,7 @@
                 },
                 new Translation
                 {
-                    ID = 9,
+                    ID = 10,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(February)",
@@ -82,7 +90,7 @@
                 },
                 new Translation
                 {
-                    ID = 10,
+                    ID = 11,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(March)",
@@ -90,7 +98,7 @@
                 },
                 new Translation
                 {
-                    ID = 11,
+                    ID = 12,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(April)",
@@ -98,7 +106,7 @@
                 },
                 new Translation
                 {
-                    ID = 12,
+                    ID = 13,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(May)",
@@ -106,7 +114,7 @@
                 },
                 new Translation
                 {
-                    ID = 13,
+                    ID = 14,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(June)",
@@ -114,7 +122,7 @@
                 },
                 new Translation
                 {
-                    ID = 14,
+                    ID = 15,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(July)",
@@ -122,7 +130,7 @@
                 },
                 new Translation
                 {
-                    ID = 15,
+                    ID = 16,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(August)",
@@ -130,7 +138,7 @@
                 },
                 new Translation
                 {
-                    ID = 16,
+                    ID = 17,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(September)",
@@ -138,7 +146,7 @@
                 },
                 new Translation
                 {
-                    ID = 17,
+                    ID = 18,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(October)",
@@ -146,7 +154,7 @@
                 },
                 new Translation
                 {
-                    ID = 18,
+                    ID = 19,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(November)",
@@ -154,7 +162,7 @@
                 },
                 new Translation
                 {
-                    ID = 19,
+                    ID = 20,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(December)",
@@ -162,7 +170,7 @@
                 },
                 new Translation
                 {
-                    ID = 20,
+                    ID = 21,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Mon)",
@@ -170,7 +178,7 @@
                 },
                 new Translation
                 {
-                    ID = 21,
+                    ID = 22,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Tue)",
@@ -178,7 +186,7 @@
                 },
                 new Translation
                 {
-                    ID = 22,
+                    ID = 23,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Wed)",
@@ -186,7 +194,7 @@
                 },
                 new Translation
                 {
-                    ID = 23,
+                    ID = 24,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Thu)",
@@ -194,7 +202,7 @@
                 },
                 new Translation
                 {
-                    ID = 24,
+                    ID = 25,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Fri)",
@@ -202,7 +210,7 @@
                 },
                 new Translation
                 {
-                    ID = 25,
+                    ID = 26,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Sat)",
@@ -210,7 +218,7 @@
                 },
                 new Translation
                 {
-                    ID = 26,
+                    ID = 27,
                     LanguageCode = "PT",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Sun)",
@@ -218,7 +226,255 @@
                 },
                 new Translation
                 {
-                    ID = 27,
+                    ID = 28,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_brand",
+                    TokenValue = "#(krf)",
+                    Text = "KRF"
+                },
+                new Translation
+                {
+                    ID = 29,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(User)",
+                    Text = "Utilizador"
+                },
+                new Translation
+                {
+                    ID = 30,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Administration)",
+                    Text = "Administração"
+                },
+                new Translation
+                {
+                    ID = 31,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Logout)",
+                    Text = "Sair"
+                },
+                new Translation
+                {
+                    ID = 32,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Test1)",
+                    Text = "Teste 1"
+                },
+                new Translation
+                {
+                    ID = 33,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Test2)",
+                    Text = "Teste 2"
+                },
+                new Translation
+                {
+                    ID = 34,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(SubTest1)",
+                    Text = "Sub-Menu 1"
+                },
+                new Translation
+                {
+                    ID = 35,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(SubTest2)",
+                    Text = "Sub-Menu 2"
+                },
+                new Translation
+                {
+                    ID = 36,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(Username)",
+                    Text = "Utilizador"
+                },
+                new Translation
+                {
+                    ID = 37,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(Password)",
+                    Text = "Palavra-Passe"
+                },
+                new Translation
+                {
+                    ID = 38,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(LoginButton)",
+                    Text = "Entrar"
+                },
+                new Translation
+                {
+                    ID = 39,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(LoginDrop)",
+                    Text = "Entrar"
+                },
+                new Translation
+                {
+                    ID = 40,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(NewLogin)",
+                    Text = "Registar"
+                },
+                new Translation
+                {
+                    ID = 41,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(Tooltip)",
+                    Text = "Notificações"
+                },
+                new Translation
+                {
+                    ID = 42,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(NotificationHeader)",
+                    Text = "Lista de Notificações"
+                },
+                new Translation
+                {
+                    ID = 43,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(FromDateToDate)",
+                    Text = "De {0} até {1}"
+                },
+                new Translation
+                {
+                    ID = 44,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(OldUnreadedNotification)",
+                    Text = "Existem {0} notificações por ler de datas anteriores a {1}, clique aqui para vêr lista de não lidas"
+                },
+                new Translation
+                {
+                    ID = 45,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(ViewAll)",
+                    Text = "Ver Todas"
+                },
+                new Translation
+                {
+                    ID = 46,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Yes)",
+                    Text = "Sim"
+                },
+                new Translation
+                {
+                    ID = 47,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(No)",
+                    Text = "Não"
+                },
+                new Translation
+                {
+                    ID = 48,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Ok)",
+                    Text = "Ok"
+                },
+                new Translation
+                {
+                    ID = 49,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Cancel)",
+                    Text = "Cancelar"
+                },
+                new Translation
+                {
+                    ID = 50,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(ModalTest1)",
+                    Text = "Modal Test 1 Pt"
+                },
+                new Translation
+                {
+                    ID = 51,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(ModalTest2)",
+                    Text = "Modal Test 2 Pt"
+                },
+                new Translation
+                {
+                    ID = 52,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookiesModal)",
+                    Text = "Aceitar Cookies"
+                },
+                new Translation
+                {
+                    ID = 53,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookiesModalDescription)",
+                    Text = "Esta página utiliza cookies para análise de informação. Seleccione sim se permite a utilização dos cookies a baixo."
+                },
+                new Translation
+                {
+                    ID = 54,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieAnalyticDescription)",
+                    Text = "Este cookie destina-se à análise de dados. Este cookie será desativado se seleccionar não."
+                },
+                new Translation
+                {
+                    ID = 55,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieKey)",
+                    Text = "Nome do Cookie"
+                },
+                new Translation
+                {
+                    ID = 56,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieDescription)",
+                    Text = "Descrição"
+                },
+                new Translation
+                {
+                    ID = 57,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_dropdown",
+                    TokenValue = "#(no_option)",
+                    Text = "Nenhum"
+                },
+                new Translation
+                {
+                    ID = 58,
+                    LanguageCode = "PT",
+                    TranslationCategoryValue = "_dropdown",
+                    TokenValue = "#(opt_2)",
+                    Text = "Opção 2"
+                },
+                new Translation
+                {
+                    ID = 59,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_generic",
                     TokenValue = "#(loadingText)",
@@ -226,7 +482,7 @@
                 },
                 new Translation
                 {
-                    ID = 28,
+                    ID = 60,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_generic",
                     TokenValue = "#(goBackToHome)",
@@ -234,7 +490,7 @@
                 },
                 new Translation
                 {
-                    ID = 29,
+                    ID = 61,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_generic",
                     TokenValue = "#(goBackToHomeToolTip)",
@@ -242,7 +498,7 @@
                 },
                 new Translation
                 {
-                    ID = 30,
+                    ID = 62,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_generic",
                     TokenValue = "#(cardDetails)",
@@ -250,7 +506,15 @@
                 },
                 new Translation
                 {
-                    ID = 31,
+                    ID = 63,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_generic",
+                    TokenValue = "#(Cancel)",
+                    Text = "Cancel"
+                },
+                new Translation
+                {
+                    ID = 64,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_tableText",
                     TokenValue = "#(edit)",
@@ -258,7 +522,7 @@
                 },
                 new Translation
                 {
-                    ID = 32,
+                    ID = 65,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_tableText",
                     TokenValue = "#(remove)",
@@ -266,7 +530,7 @@
                 },
                 new Translation
                 {
-                    ID = 33,
+                    ID = 66,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_TestPage",
                     TokenValue = "#(TestPage Title)",
@@ -274,7 +538,7 @@
                 },
                 new Translation
                 {
-                    ID = 34,
+                    ID = 67,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(January)",
@@ -282,7 +546,7 @@
                 },
                 new Translation
                 {
-                    ID = 35,
+                    ID = 68,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(February)",
@@ -290,7 +554,7 @@
                 },
                 new Translation
                 {
-                    ID = 36,
+                    ID = 69,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(March)",
@@ -298,7 +562,7 @@
                 },
                 new Translation
                 {
-                    ID = 37,
+                    ID = 70,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(April)",
@@ -306,7 +570,7 @@
                 },
                 new Translation
                 {
-                    ID = 38,
+                    ID = 71,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(May)",
@@ -314,7 +578,7 @@
                 },
                 new Translation
                 {
-                    ID = 39,
+                    ID = 72,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(June)",
@@ -322,7 +586,7 @@
                 },
                 new Translation
                 {
-                    ID = 40,
+                    ID = 73,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(July)",
@@ -330,7 +594,7 @@
                 },
                 new Translation
                 {
-                    ID = 41,
+                    ID = 74,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(August)",
@@ -338,7 +602,7 @@
                 },
                 new Translation
                 {
-                    ID = 42,
+                    ID = 75,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(September)",
@@ -346,7 +610,7 @@
                 },
                 new Translation
                 {
-                    ID = 43,
+                    ID = 76,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(October)",
@@ -354,7 +618,7 @@
                 },
                 new Translation
                 {
-                    ID = 44,
+                    ID = 77,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(November)",
@@ -362,7 +626,7 @@
                 },
                 new Translation
                 {
-                    ID = 45,
+                    ID = 78,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(December)",
@@ -370,7 +634,7 @@
                 },
                 new Translation
                 {
-                    ID = 46,
+                    ID = 79,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Mon)",
@@ -378,7 +642,7 @@
                 },
                 new Translation
                 {
-                    ID = 47,
+                    ID = 80,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Tue)",
@@ -386,7 +650,7 @@
                 },
                 new Translation
                 {
-                    ID = 48,
+                    ID = 81,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Wed)",
@@ -394,7 +658,7 @@
                 },
                 new Translation
                 {
-                    ID = 49,
+                    ID = 82,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Thu)",
@@ -402,7 +666,7 @@
                 },
                 new Translation
                 {
-                    ID = 50,
+                    ID = 83,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Fri)",
@@ -410,7 +674,7 @@
                 },
                 new Translation
                 {
-                    ID = 51,
+                    ID = 84,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Sat)",
@@ -418,11 +682,259 @@
                 },
                 new Translation
                 {
-                    ID = 52,
+                    ID = 85,
                     LanguageCode = "EN",
                     TranslationCategoryValue = "_datePicker",
                     TokenValue = "#(Sun)",
                     Text = "Sun"
+                },
+                new Translation
+                {
+                    ID = 86,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_brand",
+                    TokenValue = "#(krf)",
+                    Text = "KRF"
+                },
+                new Translation
+                {
+                    ID = 87,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(User)",
+                    Text = "User"
+                },
+                new Translation
+                {
+                    ID = 88,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Administration)",
+                    Text = "Administration"
+                },
+                new Translation
+                {
+                    ID = 89,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Logout)",
+                    Text = "Logout"
+                },
+                new Translation
+                {
+                    ID = 90,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Test1)",
+                    Text = "Test 1"
+                },
+                new Translation
+                {
+                    ID = 91,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(Test2)",
+                    Text = "Test 2"
+                },
+                new Translation
+                {
+                    ID = 92,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(SubTest1)",
+                    Text = "Submenu 1"
+                },
+                new Translation
+                {
+                    ID = 93,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_menu",
+                    TokenValue = "#(SubTest2)",
+                    Text = "Submenu 2"
+                },
+                new Translation
+                {
+                    ID = 94,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(Username)",
+                    Text = "Username"
+                },
+                new Translation
+                {
+                    ID = 95,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(Password)",
+                    Text = "Password"
+                },
+                new Translation
+                {
+                    ID = 96,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(LoginButton)",
+                    Text = "SignIn"
+                },
+                new Translation
+                {
+                    ID = 97,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(LoginDrop)",
+                    Text = "Login"
+                },
+                new Translation
+                {
+                    ID = 98,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_loginform",
+                    TokenValue = "#(NewLogin)",
+                    Text = "SignUp"
+                },
+                new Translation
+                {
+                    ID = 99,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(Tooltip)",
+                    Text = "Notifications"
+                },
+                new Translation
+                {
+                    ID = 100,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(NotificationHeader)",
+                    Text = "Notification List"
+                },
+                new Translation
+                {
+                    ID = 101,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(FromDateToDate)",
+                    Text = "From {0} to {1}"
+                },
+                new Translation
+                {
+                    ID = 102,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(OldUnreadedNotification)",
+                    Text = "There are {0} unreaded notifications from dates previous to {1}, click here to check full unread list"
+                },
+                new Translation
+                {
+                    ID = 103,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_notificationMenu",
+                    TokenValue = "#(ViewAll)",
+                    Text = "View All"
+                },
+                new Translation
+                {
+                    ID = 104,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Yes)",
+                    Text = "Yes"
+                },
+                new Translation
+                {
+                    ID = 105,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(No)",
+                    Text = "No"
+                },
+                new Translation
+                {
+                    ID = 106,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Ok)",
+                    Text = "Ok"
+                },
+                new Translation
+                {
+                    ID = 107,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(Cancel)",
+                    Text = "Cancel"
+                },
+                new Translation
+                {
+                    ID = 108,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(ModalTest1)",
+                    Text = "Modal Test 1 en"
+                },
+                new Translation
+                {
+                    ID = 109,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_modal",
+                    TokenValue = "#(ModalTest2)",
+                    Text = "Modal Test 2 en"
+                },
+                new Translation
+                {
+                    ID = 110,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookiesModal)",
+                    Text = "Allow Cookies"
+                },
+                new Translation
+                {
+                    ID = 111,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookiesModalDescription)",
+                    Text = "This page uses some cookies for analytics, select yes if you allow the use of cookies bellow."
+                },
+                new Translation
+                {
+                    ID = 112,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieAnalyticDescription)",
+                    Text = "Cookie used for analytics, this cookie will be disabled if no is selected."
+                },
+                new Translation
+                {
+                    ID = 113,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieKey)",
+                    Text = "Cookie Name"
+                },
+                new Translation
+                {
+                    ID = 114,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_cookieModal",
+                    TokenValue = "#(CookieDescription)",
+                    Text = "Description"
+                },
+                new Translation
+                {
+                    ID = 115,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_dropdown",
+                    TokenValue = "#(no_option)",
+                    Text = "None"
+                },
+                new Translation
+                {
+                    ID = 116,
+                    LanguageCode = "EN",
+                    TranslationCategoryValue = "_dropdown",
+                    TokenValue = "#(opt_2)",
+                    Text = "Option 2"
                 }
             });
         }

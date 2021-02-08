@@ -18,5 +18,10 @@
         {
             return await this._homepageDBContext.HomePages.AsNoTracking().FirstOrDefaultAsync(q => q.LanguageCode.Equals(langCode));
         }
+
+        public void Dispose()
+        {
+            this._homepageDBContext.Dispose();
+        }
     }
 }
