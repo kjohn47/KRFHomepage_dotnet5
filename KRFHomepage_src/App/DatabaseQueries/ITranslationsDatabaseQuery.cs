@@ -6,20 +6,23 @@
 
     using KRFCommon.Database;
 
+    using KRFHomepage.Domain.CQRS.Translations.Model;
     using KRFHomepage.Domain.Database.Translations;
     public interface ITranslationsDatabaseQuery : IDisposable
     {
-        Task<List<TranslationCategory>> GetTranslationDataAsync(string langCode);
+        Task<Dictionary<string, Dictionary<string, string>>> GetTranslationDataAsync( string langCode );
 
         Task<IEnumerable<string>> GetLanguageCodesAsync();
 
-        Task<IQueryCommand> AddNewLanguageAsync(string langCode, string langDescription);
+        Task<Dictionary<string, ErrorTranslationItem>> GetErrorTranslations( string langCode );
 
-        Task<IQueryCommand> AddNewCategoryAsync(string categoryName);
+        Task<IQueryCommand> AddNewLanguageAsync( string langCode, string langDescription );
 
-        Task<IQueryCommand> AddNewTokenAsync(string token);
+        Task<IQueryCommand> AddNewCategoryAsync( string categoryName );
 
-        Task<IQueryCommand> AddNewTranslationAsync(string langCode, string category, string token, string translation);
+        Task<IQueryCommand> AddNewTokenAsync( string token );
+
+        Task<IQueryCommand> AddNewTranslationAsync( string langCode, string category, string token, string translation );
 
     }
 }

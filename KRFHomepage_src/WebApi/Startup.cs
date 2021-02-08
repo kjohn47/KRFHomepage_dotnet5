@@ -13,10 +13,10 @@ namespace KRFHomepage.WebApi
     using KRFCommon.Constants;
     using KRFCommon.Api;
     using KRFCommon.Database;
+    using KRFCommon.MemoryCache;
 
     using KRFHomepage.App.Injection;
     using KRFHomepage.App.Model;
-    using KRFCommon.MemoryCache;
 
     public class Startup
     {
