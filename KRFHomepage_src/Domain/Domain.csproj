@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <Folder Include="CQRS\Homepage\Command\" />
+    <Folder Include="CQRS\Homepage\Model\" />
     <Folder Include="CQRS\Translations\Command\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.2.5.1" />
+    <PackageReference Include="KRFCommon" Version="1.2.5.6" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@
 
     using KRFHomepage.Domain.Database.Common;
 
-    public static class CommonSeeder
+    public static class LanguageSeeder
     {
         public static void Seed(EntityTypeBuilder<Language> entity)
         {
