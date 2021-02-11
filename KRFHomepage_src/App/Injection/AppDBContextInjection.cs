@@ -1,7 +1,6 @@
 ﻿namespace KRFHomepage.App.Injection
 {
     using System;
-    using System.Linq;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -13,18 +12,18 @@
     {
         public static void InjectAppDBContext( this IServiceCollection services, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any() )
-            {
-                services.InjectDBContext<HomepageDBContext>( databaseSettings.Databases.ElementAt( 0 ), databaseSettings.MigrationAssembly );
+            //Context inject
+            services.InjectDBContext<HomepageDBContext>( databaseSettings );
 
-                services.AddScoped( s => new Lazy<IHomepageDatabaseQuery>( () => new HomepageDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
-                services.AddScoped( s => new Lazy<ITranslationsDatabaseQuery>( () => new TranslationsDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
-            }
+            //Inject database query handlers
+            services.AddScoped( s => new Lazy<IHomepageDatabaseQuery>( () => new HomepageDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
+            services.AddScoped( s => new Lazy<ITranslationsDatabaseQuery>( () => new TranslationsDatabaseQuery( s.GetService<HomepageDBContext>() ) ) );
         }
 
         public static void ConfigureAppDBContext( this IApplicationBuilder app, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null )
+            //Inject Migration Automation
+            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration )
             {
                 using ( var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope() )
                 {
