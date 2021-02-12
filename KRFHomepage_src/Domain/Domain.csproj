@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.2.6.6" />
+    <PackageReference Include="KRFCommon" Version="1.2.7.6" />
   </ItemGroup>
 
 </Project>
