@@ -8,7 +8,8 @@ namespace KRFHomepage.WebApi
     using Microsoft.Extensions.Logging;
 
     using KRFCommon.Context;
-    using KRFCommon.Handler;
+    using KRFCommon.Middleware;
+    using KRFCommon.Logger;
     using KRFCommon.Swagger;
     using KRFCommon.Constants;
     using KRFCommon.Api;
@@ -26,7 +27,6 @@ namespace KRFHomepage.WebApi
             this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
             this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
             this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
-            this._cacheMemorySettings = configuration.GetSection( KRFApiSettings.MemoryCacheSettings_Key ).Get<KRFMemoryCacheSettings>() ?? new KRFMemoryCacheSettings();
 
             this.HostingEnvironment = env;
         }
@@ -35,7 +35,6 @@ namespace KRFHomepage.WebApi
         private readonly RequestContext _requestContext;
         private readonly KRFDatabases _databases;
         private readonly bool _enableLogs;
-        private readonly KRFMemoryCacheSettings _cacheMemorySettings;
 
         public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
@@ -53,6 +52,7 @@ namespace KRFHomepage.WebApi
                  l.AddDebug();
                  l.AddEventLog();
                  l.AddEventSourceLogger();
+                 l.AddKRFLogToFileLogger( this.Configuration.GetSection( KRFApiSettings.KRFLoggerConfig_Key ) );
              } );
 
             services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
@@ -61,7 +61,7 @@ namespace KRFHomepage.WebApi
 
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
 
-            services.AddKRFMemoryCache( this._cacheMemorySettings );
+            services.AddKRFMemoryCache( this.Configuration.GetSection( KRFApiSettings.MemoryCacheSettings_Key ) );
 
             //Dependency injection
             services.InjectAppDBContext( this._databases );
@@ -80,15 +80,15 @@ namespace KRFHomepage.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.KRFLogAndExceptionHandlerConfigure( 
-                loggerFactory, 
-                ( this._enableLogs || isDev ), 
-                this._apiSettings.ApiName, 
-                this._apiSettings.TokenIdentifier, 
+
+            app.KRFLogAndExceptionHandlerConfigure(
+                loggerFactory,
+                ( this._enableLogs || isDev ),
+                this._apiSettings.ApiName,
+                this._apiSettings.TokenIdentifier,
                 this._requestContext.EnableRequestRead,
                 this._requestContext.BufferSize );
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
