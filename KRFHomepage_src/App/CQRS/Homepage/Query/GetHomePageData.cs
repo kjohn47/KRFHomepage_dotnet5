@@ -7,33 +7,54 @@
     using KRFCommon.CQRS.Common;
 
     using KRFHomepage.App.DatabaseQueries;
-    using KRFHomepage.Domain.CQRS.Homepage.Query;    
+    using KRFHomepage.Domain.CQRS.Homepage.Query;
+    using KRFCommon.MemoryCache;
+    using KRFHomepage.App.Constants;
+    using System.Linq;
+    using System.Net;
 
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {
         private readonly IHomepageDatabaseQuery _homePageQuery;
-        
-        public GetHomePageData(Lazy<IHomepageDatabaseQuery> homePageQuery)
+        private readonly ITranslationsDatabaseQuery _translationQuery;
+        private readonly IKRFMemoryCache _memoryCache;
+
+        public GetHomePageData( Lazy<IHomepageDatabaseQuery> homePageQuery, Lazy<ITranslationsDatabaseQuery> translationQuery, IKRFMemoryCache memoryCache )
         {
             this._homePageQuery = homePageQuery.Value;
-        }  
+            this._translationQuery = translationQuery.Value;
+            this._memoryCache = memoryCache;
+        }
 
-        public async Task<IResponseOut<HomePageOutput>> QueryAsync(HomePageInput request)
+        public async Task<IResponseOut<HomePageOutput>> QueryAsync( HomePageInput request )
         {
-            var homeDB = await this._homePageQuery.GetHomePageDataAsync(request.LangCode);
-            if (homeDB != null)
+            var languageCodes = await this._memoryCache.GetCachedItemAsync( AppConstants.MemoryCacheTranslationLanguageCodeKey,
+                () => this._translationQuery.GetLanguageCodesAsync() );
+
+            if ( !languageCodes.Contains( request.LangCode ) )
             {
-                var result = new HomePageOutput {
-                    Title = homeDB.Title,
-                    Subtitle = homeDB.SubTitle,
-                    Descrption = homeDB.Description
-                };
-                return ResponseOut<HomePageOutput>.GenerateResult(result);
+                return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound,
+                    "Language code does not exist on system",
+                    ResponseErrorType.Validation,
+                    nameof( request.LangCode ) ) );
             }
-            else
+
+            var key = string.Format( AppConstants.MemoryCacheHomePageItemKey, request.LangCode );
+            var homeDB = await this._memoryCache.GetCachedItemAsync( key,
+                () => this._homePageQuery.GetHomePageDataAsync( request.LangCode ),
+                AppConstants.MemoryCacheTranslationSettingsKey );
+
+            if ( homeDB == null )
             {
-                return ResponseOut<HomePageOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.NotFound, "Could not retrieve requested homepage", ResponseErrorType.Database));
+                return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound, "Could not retrieve requested homepage", ResponseErrorType.Database ) );
             }
+
+            return ResponseOut<HomePageOutput>.GenerateResult( new HomePageOutput
+            {
+                Title = homeDB.Title,
+                Subtitle = homeDB.SubTitle,
+                Descrption = homeDB.Description
+            } );
         }
     }
 }
