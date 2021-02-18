@@ -17,6 +17,7 @@ namespace KRFHomepage.WebApi
     using KRFCommon.MemoryCache;
 
     using KRFHomepage.App.Injection;
+    using KRFCommon.Controller;
 
     public class Startup
     {
@@ -57,7 +58,7 @@ namespace KRFHomepage.WebApi
 
             services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
 
-            services.AddControllers();
+            services.AddKRFController();
 
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
 
