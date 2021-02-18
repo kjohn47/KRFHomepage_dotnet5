@@ -14,7 +14,7 @@
             }
             else
             {
-                this.LangCode = langCode;
+                this.LangCode = langCode.ToUpperInvariant();
                 this.GetKeys = getKeys;
             }
         }
