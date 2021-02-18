@@ -9,6 +9,7 @@
 
     using KRFHomepage.Domain.CQRS.Homepage.Query;
     using KRFHomepage.Domain.CQRS.Translations.Query;
+    using Microsoft.AspNetCore.Authorization;
 
     [ApiController]
     [Route( "homepage/" )]
@@ -38,7 +39,7 @@
         [FromRoute] string langCode,
         [FromQuery] bool? getKeys )
         {
-            return await this.ExecuteAsyncQuery( new TranslationRequest( langCode.ToUpperInvariant(), getKeys.HasValue && getKeys.Value ), query );
+            return await this.ExecuteAsyncQuery( new TranslationRequest( langCode, getKeys.HasValue && getKeys.Value ), query );
         }
     }
 }
