@@ -18,6 +18,7 @@ namespace KRFHomepage.WebApi
 
     using KRFHomepage.App.Injection;
     using KRFCommon.Controller;
+    using KRFCommon.Proxy;
 
     public class Startup
     {
@@ -28,7 +29,7 @@ namespace KRFHomepage.WebApi
             this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
             this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
             this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
-
+            this._externalServices = configuration.GetSection( KRFApiSettings.KRFExternalServices_Key ).Get<KRFExternalServices>();
             this.HostingEnvironment = env;
         }
 
@@ -36,7 +37,7 @@ namespace KRFHomepage.WebApi
         private readonly RequestContext _requestContext;
         private readonly KRFDatabases _databases;
         private readonly bool _enableLogs;
-
+        private readonly KRFExternalServices _externalServices;
         public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
 
@@ -68,7 +69,7 @@ namespace KRFHomepage.WebApi
             services.InjectAppDBContext( this._databases );
             services.InjectAppQueries();
             services.InjectAppCommands();
-            services.InjectAppProxies();
+            services.InjectAppProxies( this._externalServices );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
