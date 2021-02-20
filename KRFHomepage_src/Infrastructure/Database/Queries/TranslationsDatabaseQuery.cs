@@ -1,4 +1,4 @@
-﻿namespace KRFHomepage.App.DatabaseQueries
+﻿namespace KRFHomepage.Infrastructure.Database.Queries
 {
     using System;
     using System.Collections.Generic;
