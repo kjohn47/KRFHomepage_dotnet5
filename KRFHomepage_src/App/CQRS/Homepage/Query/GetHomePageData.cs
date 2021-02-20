@@ -1,17 +1,17 @@
 ﻿namespace KRFHomepage.App.CQRS.Homepage.Query
 {
     using System;
+    using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
 
     using KRFCommon.CQRS.Query;
     using KRFCommon.CQRS.Common;
-
-    using KRFHomepage.App.DatabaseQueries;
-    using KRFHomepage.Domain.CQRS.Homepage.Query;
     using KRFCommon.MemoryCache;
+
+    using KRFHomepage.Infrastructure.Database.Queries;
+    using KRFHomepage.Domain.CQRS.Homepage.Query;
     using KRFHomepage.App.Constants;
-    using System.Linq;
-    using System.Net;
 
     public class GetHomePageData : IQuery<HomePageInput, HomePageOutput>
     {

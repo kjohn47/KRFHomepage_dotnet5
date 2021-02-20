@@ -10,7 +10,7 @@
     using KRFCommon.MemoryCache;
 
     using KRFHomepage.App.Constants;
-    using KRFHomepage.App.DatabaseQueries;
+    using KRFHomepage.Infrastructure.Database.Queries;
     using KRFHomepage.Domain.CQRS.Translations.Query;
 
     public class GetAppTranslations : IQuery<TranslationRequest, TranslationResponse>

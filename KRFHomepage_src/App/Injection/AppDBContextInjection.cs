@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 
-    using KRFHomepage.App.DatabaseQueries;
+    using KRFHomepage.Infrastructure.Database.Queries;
     using KRFHomepage.Infrastructure.Database.Context;
     using KRFCommon.Database;
 
