@@ -35,7 +35,7 @@
             {
                 return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound,
                     "Language code does not exist on system",
-                    ResponseErrorType.Validation,
+                    ResponseErrorType.Application,
                     nameof( request.LangCode ) ) );
             }
 
