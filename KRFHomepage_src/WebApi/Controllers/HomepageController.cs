@@ -17,7 +17,7 @@
     {
         [HttpGet( "home/{langCode}" )]
         [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( HomePageOutput ) )]
-        public async Task<IActionResult> Get(
+        public async Task<IActionResult> GetHomeByCode(
             [FromServices] IQuery<HomePageInput, HomePageOutput> query,
             [FromRoute] string langCode )
         {
@@ -26,7 +26,7 @@
 
         [HttpGet( "translations" )]
         [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( TranslationResponse ) )]
-        public async Task<IActionResult> GetDefault(
+        public async Task<IActionResult> GetTranslations(
         [FromServices] IQuery<TranslationRequest, TranslationResponse> query )
         {
             return await this.ExecuteAsyncQuery( new TranslationRequest( null ), query );
@@ -34,7 +34,7 @@
 
         [HttpGet( "translations/{langCode}" )]
         [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( TranslationResponse ) )]
-        public async Task<IActionResult> Get(
+        public async Task<IActionResult> GetTranslationsByCode(
         [FromServices] IQuery<TranslationRequest, TranslationResponse> query,
         [FromRoute] string langCode,
         [FromQuery] bool? getKeys )
