@@ -34,7 +34,8 @@
                 return ResponseOut<TranslationResponse>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound, 
                     "Language code does not exist on system", 
                     ResponseErrorType.Application, 
-                    nameof( request.LangCode ) ) );
+                    nameof( request.LangCode ),
+                    AppConstants.InvalidLanguageErrCode ) );
             }
 
             var translationCacheKey = string.Format( AppConstants.MemoryCacheTranslationItemKey, request.LangCode );
