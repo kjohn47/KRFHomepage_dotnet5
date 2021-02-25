@@ -36,7 +36,8 @@
                 return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound,
                     "Language code does not exist on system",
                     ResponseErrorType.Application,
-                    nameof( request.LangCode ) ) );
+                    nameof( request.LangCode ),
+                    AppConstants.InvalidLanguageErrCode ) );
             }
 
             var key = string.Format( AppConstants.MemoryCacheHomePageItemKey, request.LangCode );
