@@ -28,10 +28,11 @@
 
         public async Task<IResponseOut<HomePageOutput>> QueryAsync( HomePageInput request )
         {
-            var languageCodes = await this._memoryCache.GetCachedItemAsync( AppConstants.MemoryCacheTranslationLanguageCodeKey,
+            var cachedLanguageCodes = await this._memoryCache.GetOrInsertCachedItemAsync(
+                AppConstants.MemoryCacheTranslationLanguageCodeKey,
                 () => this._translationQuery.GetLanguageCodesAsync() );
 
-            if ( !languageCodes.Contains( request.LangCode ) )
+            if ( !cachedLanguageCodes.Result.Contains( request.LangCode ) )
             {
                 return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound,
                     "Language code does not exist on system",
@@ -41,20 +42,21 @@
             }
 
             var key = string.Format( AppConstants.MemoryCacheHomePageItemKey, request.LangCode );
-            var homeDB = await this._memoryCache.GetCachedItemAsync( key,
-                () => this._homePageQuery.GetHomePageDataAsync( request.LangCode ),
-                AppConstants.MemoryCacheTranslationSettingsKey );
+            var cachedhomeDB = await this._memoryCache.GetOrInsertCachedItemAsync(
+                        key,
+                        AppConstants.MemoryCacheTranslationSettingsKey,
+                        () => this._homePageQuery.GetHomePageDataAsync( request.LangCode ) );
 
-            if ( homeDB == null )
+            if ( cachedhomeDB.Result == null )
             {
                 return ResponseOut<HomePageOutput>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound, "Could not retrieve requested homepage", ResponseErrorType.Database ) );
             }
 
             return ResponseOut<HomePageOutput>.GenerateResult( new HomePageOutput
             {
-                Title = homeDB.Title,
-                Subtitle = homeDB.SubTitle,
-                Descrption = homeDB.Description
+                Title = cachedhomeDB.Result.Title,
+                Subtitle = cachedhomeDB.Result.SubTitle,
+                Descrption = cachedhomeDB.Result.Description
             } );
         }
     }
