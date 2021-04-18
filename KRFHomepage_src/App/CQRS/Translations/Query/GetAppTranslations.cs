@@ -26,10 +26,11 @@
 
         public async Task<IResponseOut<TranslationResponse>> QueryAsync( TranslationRequest request )
         {
-            var languageCodes = await this._memoryCache.GetCachedItemAsync( AppConstants.MemoryCacheTranslationLanguageCodeKey,
+            var cachedLanguageCodes = await this._memoryCache.GetOrInsertCachedItemAsync( 
+                AppConstants.MemoryCacheTranslationLanguageCodeKey,
                 () => this._translationQuery.GetLanguageCodesAsync() );
 
-            if ( !languageCodes.Contains( request.LangCode ) )
+            if ( !cachedLanguageCodes.Result.Contains( request.LangCode ) )
             {
                 return ResponseOut<TranslationResponse>.GenerateFault( new ErrorOut( HttpStatusCode.NotFound, 
                     "Language code does not exist on system", 
@@ -41,19 +42,21 @@
             var translationCacheKey = string.Format( AppConstants.MemoryCacheTranslationItemKey, request.LangCode );
             var errorTranslationCacheKey = string.Format( AppConstants.MemoryCacheErrorTranslationKey, request.LangCode );
 
-            var translatedText = await this._memoryCache.GetCachedItemAsync( translationCacheKey,
-                () => this._translationQuery.GetTranslationDataAsync( request.LangCode ),
-                AppConstants.MemoryCacheTranslationSettingsKey);
+            var cachedTranslatedText = await this._memoryCache.GetOrInsertCachedItemAsync( 
+                translationCacheKey,
+                AppConstants.MemoryCacheTranslationSettingsKey,
+                () => this._translationQuery.GetTranslationDataAsync( request.LangCode ) );
 
-            var errorTranslations = await this._memoryCache.GetCachedItemAsync( errorTranslationCacheKey,
-                () => this._translationQuery.GetErrorTranslations( request.LangCode ),
-                AppConstants.MemoryCacheTranslationSettingsKey );
+            var cachedErrorTranslations = await this._memoryCache.GetOrInsertCachedItemAsync( 
+                errorTranslationCacheKey,
+                AppConstants.MemoryCacheTranslationSettingsKey,
+                () => this._translationQuery.GetErrorTranslations( request.LangCode ) );
 
             return ResponseOut<TranslationResponse>.GenerateResult( new TranslationResponse
             {
-                Translation = translatedText,
-                LanguageCodes = request.GetKeys ? languageCodes : null,
-                ErrorTranslation = errorTranslations
+                Translation = cachedTranslatedText.Result,
+                LanguageCodes = request.GetKeys ? cachedLanguageCodes.Result : null,
+                ErrorTranslation = cachedErrorTranslations.Result
             } );
         }
     }
