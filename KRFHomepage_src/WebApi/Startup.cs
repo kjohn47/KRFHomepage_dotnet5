@@ -8,7 +8,6 @@ namespace KRFHomepage.WebApi
     using Microsoft.Extensions.Logging;
 
     using KRFCommon.Context;
-    using KRFCommon.Middleware;
     using KRFCommon.Logger;
     using KRFCommon.Swagger;
     using KRFCommon.Constants;
@@ -72,21 +71,8 @@ namespace KRFHomepage.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.KRFLogAndExceptionHandlerConfigure(
-                loggerFactory,
-                this._apiSettings,
-                isDev );
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.AuthConfigure( !isDev );
-
-            app.UseEndpoints( endpoints =>
-             {
-                 endpoints.MapControllers();
-             } );
+            app.ApiConfigure( this._apiSettings, loggerFactory, isDev );
 
             app.SwaggerConfigure( this._apiSettings.ApiName );
 
